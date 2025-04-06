@@ -18,7 +18,7 @@ import contextlib
 import typing
 from datetime import datetime, timezone
 
-from discord.ext import commands
+from redbot.core import commands
 from typing_extensions import Concatenate, ParamSpec
 
 from shinku.types import BotT, ContextA

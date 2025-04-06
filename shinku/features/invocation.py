@@ -21,7 +21,7 @@ import time
 import typing
 
 import discord
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.exception_handling import ReplResponseReactor
 from shinku.features.baseclass import Feature

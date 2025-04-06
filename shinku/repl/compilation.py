@@ -30,7 +30,7 @@ async def _repl_coroutine({0}):
 
     import aiohttp
     import discord
-    from discord.ext import commands
+    from redbot.core import commands
 
     try:
         import shinku

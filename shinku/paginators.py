@@ -19,7 +19,7 @@ import typing
 
 import discord
 from discord import ui
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.flags import Flags
 from shinku.hljs import get_language, guess_file_traits
@@ -272,7 +272,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
     .. code:: python3
 
-        from discord.ext import commands
+        from redbot.core import commands
 
         from shinku.paginators import PaginatorInterface
 

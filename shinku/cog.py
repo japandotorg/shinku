@@ -15,7 +15,7 @@ The Sinku debugging and diagnostics cog implementation.
 import inspect
 import typing
 
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.features.baseclass import Feature
 from shinku.features.filesystem import FilesystemFeature

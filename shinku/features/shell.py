@@ -22,7 +22,7 @@ import typing
 
 import discord
 from discord import ui
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.codeblocks import Codeblock, codeblock_converter
 from shinku.exception_handling import ReplResponseReactor

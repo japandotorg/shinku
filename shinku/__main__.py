@@ -24,7 +24,7 @@ import uuid
 
 import click
 import discord
-from discord.ext import commands
+from redbot.core import commands
 
 LOG_FORMAT: logging.Formatter = logging.Formatter(
     "%(asctime)s:%(levelname)s:%(name)s: %(message)s"

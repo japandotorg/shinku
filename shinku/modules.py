@@ -17,7 +17,7 @@ import pathlib
 import typing
 
 from braceexpand import braceexpand
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.types import BotT, ContextA
 

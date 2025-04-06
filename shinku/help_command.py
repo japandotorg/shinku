@@ -14,7 +14,7 @@ HelpCommand subclasses with shinku features
 
 import typing
 
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.paginators import PaginatorEmbedInterface, PaginatorInterface
 

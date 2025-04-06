@@ -19,7 +19,7 @@ import typing
 from types import TracebackType
 
 import discord
-from discord.ext import commands
+from redbot.core import commands
 from typing_extensions import ParamSpec
 
 from shinku.flags import Flags

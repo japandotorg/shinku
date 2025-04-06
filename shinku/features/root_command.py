@@ -21,7 +21,7 @@ except ImportError:
     from importlib_metadata import distribution, packages_distributions
 
 import discord
-from discord.ext import commands
+from redbot.core import commands
 
 from shinku.features.baseclass import Feature
 from shinku.flags import Flags
