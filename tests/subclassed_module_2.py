@@ -21,7 +21,7 @@ import shinku
 from shinku.types import ContextT
 
 
-class Magnet2(*shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES):  # pylint: disable=too-few-public-methods
+class Magnet2(*shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES): # type: ignore[reportUntypedBaseClass]  # pylint: disable=too-few-public-methods
     """
     The extended Sinku cog
     """
@@ -39,4 +39,4 @@ async def setup(bot: commands.Bot):
     The setup function for the extended cog
     """
 
-    await bot.add_cog(Magnet2(bot=bot))  # type: ignore[reportGeneralTypeIssues]
+    await bot.add_cog(Magnet2(bot=bot))

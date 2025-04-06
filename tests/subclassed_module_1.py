@@ -34,7 +34,7 @@ class ThirdPartyFeature(shinku.Feature):
         return await ctx.send("The behavior of this command has been overridden with a third party feature.")
 
 
-class Magnet1(ThirdPartyFeature, *shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES):  # pylint: disable=too-few-public-methods
+class Magnet1(ThirdPartyFeature, *shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES): # type: ignore[reportUntypedBaseClass]  # pylint: disable=too-few-public-methods
     """
     The extended Sinku cog
     """

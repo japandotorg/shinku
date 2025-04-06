@@ -14,7 +14,7 @@ Declarations for type checking
 
 import typing
 
-from redbot.core import commands
+from discord.ext import commands
 
 BotT = typing.Union[commands.Bot, commands.AutoShardedBot]
 ContextT = typing.TypeVar(
