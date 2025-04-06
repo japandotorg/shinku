@@ -10,8 +10,7 @@
 <sub>
     <img src=".github/assets/shinku_logo.svg" height="36">
 </sub>
-&nbsp;
-shinku
+Shinku
 </h1>
 <p align="center">
 <sup>
