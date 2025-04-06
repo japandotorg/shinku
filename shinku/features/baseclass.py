@@ -26,8 +26,8 @@ from shinku.types import BotT, ContextA
 __all__ = ("Feature", "CommandTask")
 
 
-_ConvertedCommand = commands.Command["Feature", typing.Any, typing.Any]
-_ConvertedGroup = commands.Group["Feature", typing.Any, typing.Any]
+_ConvertedCommand = commands.Command
+_ConvertedGroup = commands.Group
 
 
 _FeatureCommandToCommand = typing.Callable[
@@ -103,9 +103,9 @@ class Feature(commands.Cog):
             self,
             association_map: typing.Dict[
                 "Feature.Command[GenericFeature, typing.Any, typing.Any]",
-                "commands.Command[GenericFeature, typing.Any, typing.Any]",
+                "commands.Command",
             ],
-        ) -> "commands.Command[GenericFeature, P, T]":
+        ) -> "commands.Command":
             """
             Attempts to convert this Feature.Command into either a commands.Command or commands.Group
             """
@@ -186,11 +186,11 @@ class Feature(commands.Cog):
         command_set.sort(key=lambda c: c[1].depth)
         association_map: typing.Dict[
             Feature.Command["Feature", typing.Any, typing.Any],
-            commands.Command["Feature", typing.Any, typing.Any],
+            commands.Command,
         ] = {}
 
         self.feature_commands: typing.Dict[
-            str, commands.Command["Feature", typing.Any, typing.Any]
+            str, commands.Command
         ] = {}
 
         for key, cmd in command_set:
