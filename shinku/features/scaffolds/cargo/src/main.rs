@@ -1,3 +1,7 @@
-fn main() {{
-{content}
-}}
+fn main() {
+    {
+        {
+            content
+        }
+    }
+}

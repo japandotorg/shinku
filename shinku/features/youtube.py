@@ -19,17 +19,17 @@ import discord
 from shinku.types import ContextA
 
 try:
-    import yt_dlp as youtube_dl  # type: ignore
+    import yt_dlp as youtube_dl  # type: ignore[reportMissingImport]
 except ImportError:
-    import youtube_dl  # type: ignore
+    import youtube_dl  # type: ignore[reportMissingImport]
 
 from shinku.features.baseclass import Feature
 from shinku.features.voice import VoiceFeature
 
 BASIC_OPTS = {
-    'format': 'webm[abr>0]/bestaudio/best',
-    'prefer_ffmpeg': True,
-    'quiet': True
+    "format": "webm[abr>0]/bestaudio/best",
+    "prefer_ffmpeg": True,
+    "quiet": True,
 }
 
 
@@ -40,8 +40,8 @@ class BasicYouTubeDLSource(discord.FFmpegPCMAudio):
 
     def __init__(self, url: str, download: bool = False):
         ytdl = youtube_dl.YoutubeDL(BASIC_OPTS)
-        info: typing.Dict[str, typing.Any] = ytdl.extract_info(url, download=download)  # type: ignore
-        super().__init__(info['url'])
+        info: typing.Dict[str, typing.Any] = ytdl.extract_info(url, download=download)
+        super().__init__(info["url"])
 
 
 class YouTubeFeature(Feature):
@@ -49,7 +49,9 @@ class YouTubeFeature(Feature):
     Feature containing the youtube-dl command
     """
 
-    @Feature.Command(parent="jsk_voice", name="youtube_dl", aliases=["youtubedl", "ytdl", "yt"])
+    @Feature.Command(
+        parent="jsk_voice", name="youtube_dl", aliases=["youtubedl", "ytdl", "yt"]
+    )
     async def jsk_vc_youtube_dl(self, ctx: ContextA, *, url: str):
         """
         Plays audio from youtube_dl-compatible sources.
@@ -58,7 +60,7 @@ class YouTubeFeature(Feature):
         if await VoiceFeature.connected_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             if voice.is_playing():

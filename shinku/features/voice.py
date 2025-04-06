@@ -37,13 +37,15 @@ class VoiceFeature(Feature):
             return await ctx.send("Voice cannot be used because PyNaCl is not loaded.")
 
         if not discord.opus.is_loaded():
-            if hasattr(discord.opus, '_load_default'):
-                if not discord.opus._load_default():  # type: ignore  # pylint: disable=protected-access,no-member
+            if hasattr(discord.opus, "_load_default"):
+                if not discord.opus._load_default():  # pylint: disable=protected-access,no-member
                     return await ctx.send(
                         "Voice cannot be used because libopus is not loaded and attempting to load the default failed."
                     )
             else:
-                return await ctx.send("Voice cannot be used because libopus is not loaded.")
+                return await ctx.send(
+                    "Voice cannot be used because libopus is not loaded."
+                )
 
     @staticmethod
     async def connected_check(ctx: ContextA):
@@ -51,10 +53,14 @@ class VoiceFeature(Feature):
         Check whether we are connected to VC in this guild.
         """
 
-        if not ctx.guild or not ctx.guild.voice_client or (
-            not ctx.guild.voice_client.is_connected()
-            if isinstance(ctx.guild.voice_client, discord.VoiceClient)
-            else False
+        if (
+            not ctx.guild
+            or not ctx.guild.voice_client
+            or (
+                not ctx.guild.voice_client.is_connected()
+                if isinstance(ctx.guild.voice_client, discord.VoiceClient)
+                else False
+            )
         ):
             return await ctx.send("Not connected to a voice channel in this guild.")
 
@@ -70,13 +76,24 @@ class VoiceFeature(Feature):
         if check:
             return check
 
-        guild: discord.Guild = ctx.guild  # type: ignore
+        guild: discord.Guild = ctx.guild  # type: ignore[reportAssignmentType]
 
-        if (not guild.voice_client.is_playing() if isinstance(guild.voice_client, discord.VoiceClient) else False):
-            return await ctx.send("The voice client in this guild is not playing anything.")
+        if (
+            not guild.voice_client.is_playing()
+            if isinstance(guild.voice_client, discord.VoiceClient)
+            else False
+        ):
+            return await ctx.send(
+                "The voice client in this guild is not playing anything."
+            )
 
-    @Feature.Command(parent="jsk", name="voice", aliases=["vc"],
-                     invoke_without_command=True, ignore_extra=False)
+    @Feature.Command(
+        parent="jsk",
+        name="voice",
+        aliases=["vc"],
+        invoke_without_command=True,
+        ignore_extra=False,
+    )
     async def jsk_voice(self, ctx: ContextA):
         """
         Voice-related commands.
@@ -87,26 +104,30 @@ class VoiceFeature(Feature):
         if await self.voice_check(ctx):
             return
 
-        guild: discord.Guild = ctx.guild  # type: ignore
+        guild: discord.Guild = ctx.guild  # type: ignore[reportAssignmentType]
 
         # give info about the current voice client if there is one
-        voice: discord.VoiceProtocol = guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             if not voice or not voice.is_connected():
                 return await ctx.send("Not connected.")
 
-            await ctx.send(f"Connected to {voice.channel.name}, "
-                           f"{'paused' if voice.is_paused() else 'playing' if voice.is_playing() else 'idle'}.")
+            await ctx.send(
+                f"Connected to {voice.channel.name}, "
+                f"{'paused' if voice.is_paused() else 'playing' if voice.is_playing() else 'idle'}."
+            )
         else:
-            await ctx.send(f"Connected to {voice.channel} with a custom VoiceProtocol: {voice}")
+            await ctx.send(
+                f"Connected to {voice.channel} with a custom VoiceProtocol: {voice}"
+            )
 
     @Feature.Command(parent="jsk_voice", name="join", aliases=["connect"])
     async def jsk_vc_join(
         self,
         ctx: ContextA,
         *,
-        destination: typing.Union[discord.VoiceChannel, discord.Member] = None  # type: ignore
+        destination: typing.Union[discord.VoiceChannel, discord.Member] = None,  # type: ignore[reportAssignmentType]
     ):
         """
         Joins a voice channel, or moves to it if already connected.
@@ -129,7 +150,7 @@ class VoiceFeature(Feature):
             else:
                 return await ctx.send("Member has no voice channel.")
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if voice:
             if isinstance(voice, discord.VoiceClient):
@@ -137,7 +158,7 @@ class VoiceFeature(Feature):
             else:
                 await ctx.send(f"Can't move a custom VoiceProtocol: {voice}")
         else:
-            await destination.connect(reconnect=True)
+            await destination.connect(reconnect=True)  # type:ignore[reportUnreachable]
 
         await ctx.send(f"Connected to {destination.name}.")
 
@@ -150,7 +171,7 @@ class VoiceFeature(Feature):
         if await self.connected_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             await voice.disconnect()
@@ -167,7 +188,7 @@ class VoiceFeature(Feature):
         if await self.playing_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             voice.stop()
@@ -184,7 +205,7 @@ class VoiceFeature(Feature):
         if await self.playing_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             if voice.is_paused():
@@ -204,7 +225,7 @@ class VoiceFeature(Feature):
         if await self.connected_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             if not voice.is_paused():
@@ -226,14 +247,16 @@ class VoiceFeature(Feature):
 
         volume = max(0.0, min(1.0, percentage / 100))
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             source = voice.source
 
             if not isinstance(source, discord.PCMVolumeTransformer):
-                return await ctx.send("This source doesn't support adjusting volume or "
-                                      "the interface to do so is not exposed.")
+                return await ctx.send(
+                    "This source doesn't support adjusting volume or "
+                    "the interface to do so is not exposed."
+                )
 
             source.volume = volume
 
@@ -252,7 +275,7 @@ class VoiceFeature(Feature):
         if await self.connected_check(ctx):
             return
 
-        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore
+        voice: discord.VoiceProtocol = ctx.guild.voice_client  # type: ignore[reportAssignmentType]
 
         if isinstance(voice, discord.VoiceClient):
             if voice.is_playing():

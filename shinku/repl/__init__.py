@@ -13,8 +13,8 @@ Repl-related operations and tools for Sinku.
 """
 
 # pylint: disable=wildcard-import
-from shinku.repl.compilation import *  # noqa: F401
-from shinku.repl.disassembly import create_tree, disassemble, get_adaptive_spans  # type: ignore  # noqa: F401
-from shinku.repl.inspections import all_inspections  # type: ignore  # noqa: F401
-from shinku.repl.repl_builtins import get_var_dict_from_ctx  # type: ignore  # noqa: F401
-from shinku.repl.scope import *  # noqa: F401
+from shinku.repl.compilation import *  # noqa: F401, F403
+from shinku.repl.disassembly import create_tree, disassemble, get_adaptive_spans  # type: ignore[reportUnusedImport]  # noqa: F401
+from shinku.repl.inspections import all_inspections  # type: ignore[reportUnusedImport]  # noqa: F401
+from shinku.repl.repl_builtins import get_var_dict_from_ctx  # type: ignore[reportUnusedImport]  # noqa: F401
+from shinku.repl.scope import *  # noqa: F401, F403

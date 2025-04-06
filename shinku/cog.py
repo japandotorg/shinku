@@ -35,7 +35,17 @@ __all__ = (
     "setup",
 )
 
-STANDARD_FEATURES = (VoiceFeature, GuildFeature, FilesystemFeature, InvocationFeature, ShellFeature, SQLFeature, PythonFeature, ManagementFeature, RootCommand)
+STANDARD_FEATURES = (
+    VoiceFeature,
+    GuildFeature,
+    FilesystemFeature,
+    InvocationFeature,
+    ShellFeature,
+    SQLFeature,
+    PythonFeature,
+    ManagementFeature,
+    RootCommand,
+)
 
 OPTIONAL_FEATURES: typing.List[typing.Type[Feature]] = []
 
@@ -47,7 +57,7 @@ else:
     OPTIONAL_FEATURES.insert(0, YouTubeFeature)
 
 
-class Sinku(*OPTIONAL_FEATURES, *STANDARD_FEATURES):  # type: ignore  # pylint: disable=too-few-public-methods
+class Sinku(*OPTIONAL_FEATURES, *STANDARD_FEATURES):  # type: ignore[reportUntypedBaseClass]  # pylint: disable=too-few-public-methods
     """
     The frontend subclass that mixes in to form the final Sinku cog.
     """
@@ -58,7 +68,7 @@ async def async_setup(bot: commands.Bot):
     The async setup function defining the shinku.cog and shinku extensions.
     """
 
-    await bot.add_cog(Sinku(bot=bot))  # type: ignore
+    await bot.add_cog(Sinku(bot=bot))
 
 
 def setup(bot: commands.Bot):  # pylint: disable=inconsistent-return-statements

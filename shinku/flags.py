@@ -25,7 +25,7 @@ ENABLED_SYMBOLS = ("true", "t", "yes", "y", "on", "1")
 DISABLED_SYMBOLS = ("false", "f", "no", "n", "off", "0")
 
 
-FlagHandler = typing.Optional[typing.Callable[['FlagMeta'], typing.Any]]
+FlagHandler = typing.Optional[typing.Callable[["FlagMeta"], typing.Any]]
 
 
 @dataclasses.dataclass
@@ -40,7 +40,7 @@ class Flag:
     handler: FlagHandler = None
     override: typing.Any = None
 
-    def resolve_raw(self, flags: 'FlagMeta'):  # pylint: disable=too-many-return-statements
+    def resolve_raw(self, flags: "FlagMeta"):  # pylint: disable=too-many-return-statements
         """
         Receive the intrinsic value for this flag, before optionally being processed by the handler.
         """
@@ -70,7 +70,7 @@ class Flag:
 
         return self.flag_type()
 
-    def resolve(self, flags: 'FlagMeta'):
+    def resolve(self, flags: "FlagMeta"):
         """
         Resolve this flag. Only for internal use.
         Applies the handler when there is one.
@@ -79,7 +79,7 @@ class Flag:
         value = self.resolve_raw(flags)
 
         if self.handler:
-            return self.handler(value)  # type: ignore
+            return self.handler(value)  # type: ignore[reportArgumentType]
 
         return value
 
@@ -94,11 +94,11 @@ class FlagMeta(type):
         cls,
         name: str,
         base: typing.Tuple[typing.Type[typing.Any]],
-        attrs: typing.Dict[str, typing.Any]
+        attrs: typing.Dict[str, typing.Any],
     ):
-        attrs['flag_map'] = {}
+        attrs["flag_map"] = {}
 
-        for flag_name, flag_type in attrs['__annotations__'].items():
+        for flag_name, flag_type in attrs["__annotations__"].items():
             default: typing.Union[
                 FlagHandler,
                 typing.Tuple[
@@ -111,14 +111,14 @@ class FlagMeta(type):
             if isinstance(default, tuple):
                 default, handler = default
 
-            attrs['flag_map'][flag_name] = Flag(flag_name, flag_type, default, handler)
+            attrs["flag_map"][flag_name] = Flag(flag_name, flag_type, default, handler)
 
         return super(FlagMeta, cls).__new__(cls, name, base, attrs)
 
     def __getattr__(cls, name: str):
-        cls.flag_map: typing.Dict[str, Flag]
+        cls.flag_map: typing.Dict[str, Flag]  # type: ignore[reportUninitializedInstanceVariable]
 
-        if hasattr(cls, 'flag_map') and name in cls.flag_map:
+        if hasattr(cls, "flag_map") and name in cls.flag_map:
             return cls.flag_map[name].resolve(cls)
 
         return super().__getattribute__(name)
@@ -128,7 +128,9 @@ class FlagMeta(type):
             flag = cls.flag_map[name]
 
             if not isinstance(value, flag.flag_type):
-                raise ValueError(f"Attempted to set flag {name} to type {type(value).__name__} (should be {flag.flag_type.__name__})")
+                raise ValueError(
+                    f"Attempted to set flag {name} to type {type(value).__name__} (should be {flag.flag_type.__name__})"
+                )
 
             flag.override = value
         else:
@@ -146,30 +148,32 @@ class Flags(metaclass=FlagMeta):  # pylint: disable=too-few-public-methods
     """
 
     # Flag to indicate the Sinku base command group should be hidden
-    HIDE: bool
+    HIDE: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate that retention mode for REPL should be enabled by default
-    RETAIN: bool
+    RETAIN: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate that meta variables in REPL should not be prefixed with an underscore
-    NO_UNDERSCORE: bool
+    NO_UNDERSCORE: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # The scope prefix, i.e. the prefix that appears before Sinku's builtin variables in REPL sessions.
     # It is recommended that you set this programatically.
-    SCOPE_PREFIX: str = lambda flags: '' if flags.NO_UNDERSCORE else '_'  # type: ignore
+    SCOPE_PREFIX: str = lambda flags: "" if flags.NO_UNDERSCORE else "_"  # type: ignore[reportArgumentType]
 
     # Flag to indicate whether to always use paginators over relying on Discord's file preview
-    FORCE_PAGINATOR: bool
+    FORCE_PAGINATOR: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate verbose error tracebacks should be sent to the invoking channel as opposed to via direct message.
     # ALWAYS_DM_TRACEBACK takes precedence over this
-    NO_DM_TRACEBACK: bool
+    NO_DM_TRACEBACK: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate all errors, even minor ones like SyntaxErrors, should be sent via direct message.
-    ALWAYS_DM_TRACEBACK: bool
+    ALWAYS_DM_TRACEBACK: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     @classmethod
-    def traceback_destination(cls, message: discord.Message) -> typing.Optional[discord.abc.Messageable]:
+    def traceback_destination(
+        cls, message: discord.Message
+    ) -> typing.Optional[discord.abc.Messageable]:
         """
         Determine what 'default' location to send tracebacks to
         When None, the caller should decide
@@ -185,14 +189,14 @@ class Flags(metaclass=FlagMeta):  # pylint: disable=too-few-public-methods
         return None
 
     # Flag to indicate usage of braille J in shutdown command
-    USE_BRAILLE_J: bool
+    USE_BRAILLE_J: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate whether ANSI support should always be enabled
     # USE_ANSI_NEVER takes precedence over this
-    USE_ANSI_ALWAYS: bool
+    USE_ANSI_ALWAYS: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     # Flag to indicate whether ANSI support should always be disabled
-    USE_ANSI_NEVER: bool
+    USE_ANSI_NEVER: bool  # type: ignore[reportUninitializedInstanceVariable]
 
     @classmethod
     def use_ansi(cls, ctx: ContextA) -> bool:
@@ -206,4 +210,8 @@ class Flags(metaclass=FlagMeta):  # pylint: disable=too-few-public-methods
         if cls.USE_ANSI_ALWAYS:
             return True
 
-        return not ctx.author.is_on_mobile() if isinstance(ctx.author, discord.Member) and ctx.bot.intents.presences else True
+        return (
+            not ctx.author.is_on_mobile()
+            if isinstance(ctx.author, discord.Member) and ctx.bot.intents.presences
+            else True
+        )

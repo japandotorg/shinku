@@ -33,7 +33,7 @@ async def copy_context_with(
 
     # copy the message and update the attributes
     alt_message: discord.Message = copy.copy(ctx.message)
-    alt_message._update(kwargs)  # type: ignore # pylint: disable=protected-access
+    alt_message._update(kwargs)  # type: ignore[reportArgumentType] # pylint: disable=protected-access
 
     if author is not None:
         alt_message.author = author

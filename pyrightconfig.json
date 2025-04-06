@@ -1,0 +1,22 @@
+{
+    "pythonVersion": "3.8", // using 3.8 here even tho the library itself may only be 3.10+
+    "enableTypeIgnoreComments": true,
+    "reportMissingSuperCall": "none",
+    "reportMissingTypeStubs": "none",
+    "reportPrivateUsage": "none",
+    "reportPrivateLocalImportUsage": "none",
+    "reportUnsafeMultipleInheritance": "none",
+    "reportIncompatibleMethodOverride": "none",
+    "reportImplicitOverride": "none",
+    "reportImplicitStringConcatenation": "none",
+    "reportUnusedCallResult": "none",
+    "reportAny": "none",
+    "reportExplicitAny": "none",
+    "reportRedeclaration": "none",
+    "reportUnannotatedClassAttribute": "none",
+    "reportUnknownArgumentType": "none",
+    "reportUnknownLambdaType": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownParameterType": "none",
+    "reportUnknownVariableType": "none",
+}

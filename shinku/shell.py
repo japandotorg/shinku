@@ -112,7 +112,7 @@ class ShellReader:
         self.timeout = timeout
 
         self.stdout_task = (
-            self.make_reader_task(self.stdout, self.stdout_handler) # type: ignore[reportArgumentType]
+            self.make_reader_task(self.stdout, self.stdout_handler)  # type: ignore[reportArgumentType]
             if self.process.stdout
             else None
         )

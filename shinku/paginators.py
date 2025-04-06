@@ -303,11 +303,11 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         self,
         bot: BotT,
         paginator: commands.Paginator,
-        additional_buttons: typing.Optional[typing.List[ui.Button[typing.Self]]] = None,
+        additional_buttons: typing.Optional[typing.List[ui.Button[typing.Self]]] = None,  # type: ignore[reportAttributeAccessIssue]
         **kwargs: typing.Any,
     ):
-        if not isinstance(paginator, commands.Paginator): # type: ignore[reportUnnecessaryIsInstance]
-            raise TypeError("paginator must be a commands.Paginator instance")
+        if not isinstance(paginator, commands.Paginator):  # type: ignore[reportUnnecessaryIsInstance]
+            raise TypeError("paginator must be a commands.Paginator instance")  # type: ignore[reportUnreachable]
 
         self._display_page = 0
 
@@ -330,43 +330,43 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
         if self.page_size > self.max_page_size:
             raise ValueError(
-                f"Paginator passed has too large of a page size for this interface. "
+                "Paginator passed has too large of a page size for this interface. "
                 f"({self.page_size} > {self.max_page_size})"
             )
 
         super().__init__(timeout=self.timeout_length)
 
-        self.button_start: DynamicButton[typing.Self] = DynamicButton(
+        self.button_start: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_start_callback,
             self.button_start_label,
             style=discord.ButtonStyle.secondary,
         )
-        self.button_previous: DynamicButton[typing.Self] = DynamicButton(
+        self.button_previous: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_previous_callback,
             self.button_previous_label,
             style=discord.ButtonStyle.secondary,
         )
-        self.button_current: DynamicButton[typing.Self] = DynamicButton(
+        self.button_current: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_current_callback,
             self.button_current_label,
             style=discord.ButtonStyle.primary,
         )
-        self.button_next: DynamicButton[typing.Self] = DynamicButton(
+        self.button_next: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_next_callback,
             self.button_next_label,
             style=discord.ButtonStyle.secondary,
         )
-        self.button_last: DynamicButton[typing.Self] = DynamicButton(
+        self.button_last: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_last_callback,
             self.button_last_label,
             style=discord.ButtonStyle.secondary,
         )
-        self.button_goto: DynamicButton[typing.Self] = DynamicButton(
+        self.button_goto: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_goto_callback,
             self.button_goto_label,
             style=discord.ButtonStyle.primary,
         )
-        self.button_close: DynamicButton[typing.Self] = DynamicButton(
+        self.button_close: DynamicButton[typing.Self] = DynamicButton( # type: ignore[reportAttributeAccessIssue]
             self.button_close_callback,
             self.button_close_label,
             style=discord.ButtonStyle.danger,
@@ -374,12 +374,12 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
         self.additional_buttons = additional_buttons or []
 
-        self.buttons: typing.List[ui.Button[typing.Self]] = self.button_definitions()
+        self.buttons: typing.List[ui.Button[typing.Self]] = self.button_definitions() # type: ignore[reportAttributeAccessIssue]
 
         for button in self.buttons:
             self.add_item(button)
 
-    def button_definitions(self) -> typing.List[ui.Button[typing.Self]]:
+    def button_definitions(self) -> typing.List[ui.Button[typing.Self]]: # type: ignore[reportAttributeAccessIssue]
         """
         This is an overridable function you can use to remove buttons or customize their order.
 
@@ -405,10 +405,10 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         # protected access has to be permitted here to not close the paginator's pages
 
         # pylint: disable=protected-access
-        paginator_pages = list(self.paginator._pages)  # type: ignore
-        if len(self.paginator._current_page) > 1:  # type: ignore
+        paginator_pages = list(self.paginator._pages)
+        if len(self.paginator._current_page) > 1:
             paginator_pages.append(
-                "\n".join(self.paginator._current_page)  # type: ignore
+                "\n".join(self.paginator._current_page)
                 + "\n"
                 + (self.paginator.suffix or "")
             )
@@ -569,7 +569,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
     async def interaction_check(self, *args: typing.Any):  # pylint: disable=arguments-differ
         """Check that determines whether this interaction should be honored"""
-        *_, interaction = args  # type: ignore  #149
+        *_, interaction = args #149
         interaction: discord.Interaction
         return not self.owner or interaction.user.id == self.owner.id
 
@@ -579,7 +579,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         self._display_page = 0
         await interaction.response.edit_message(**self.send_kwargs)
 
-    def button_start_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_start_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Label for returning to the first page (constant)"""
         return f"1 \u200b {self.emojis.start}"
 
@@ -589,7 +589,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         self._display_page -= 1
         await interaction.response.edit_message(**self.send_kwargs)
 
-    def button_previous_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_previous_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Left arrow label for going to the previous page (constant)"""
         return str(self.emojis.back)
 
@@ -598,7 +598,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
         await interaction.response.edit_message(**self.send_kwargs)
 
-    def button_current_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_current_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Current page label (changes on page updates)"""
         return str(self.display_page + 1)
 
@@ -608,7 +608,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         self._display_page += 1
         await interaction.response.edit_message(**self.send_kwargs)
 
-    def button_next_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_next_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Right arrow label for going to the next page (constant)"""
         return str(self.emojis.forward)
 
@@ -618,7 +618,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         self._display_page = self.page_count - 1
         await interaction.response.edit_message(**self.send_kwargs)
 
-    def button_last_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_last_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Endstop label for going to the last page (changes on page count)"""
         return f"{self.emojis.end} \u200b {self.page_count}"
 
@@ -660,11 +660,11 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
 
         await interaction.response.send_modal(self.PageChangeModal(self))
 
-    def button_goto_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_goto_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Label for selecting a page (constant)"""
         return "\N{RIGHTWARDS ARROW WITH HOOK} \u200b Go to page"
 
-    async def button_close_callback(self, interaction: discord.Interaction):  # pylint: disable=unused-argument
+    async def button_close_callback(self, _: discord.Interaction):  # pylint: disable=unused-argument
         """Button to close the interface"""
 
         message = self.message
@@ -675,7 +675,7 @@ class PaginatorInterface(ui.View):  # pylint: disable=too-many-instance-attribut
         if message:
             await message.delete()
 
-    def button_close_label(self, _button: ui.Button[typing.Self]) -> str:
+    def button_close_label(self, _button: ui.Button[typing.Self]) -> str: # type: ignore[reportAttributeAccessIssue]
         """Label for closing the paginator (constant)"""
         return f"{self.emojis.close} \u200b Close paginator"
 

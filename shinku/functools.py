@@ -18,11 +18,13 @@ import typing
 
 from typing_extensions import ParamSpec
 
-T = typing.TypeVar('T')
-P = ParamSpec('P')
+T = typing.TypeVar("T")
+P = ParamSpec("P")
 
 
-def executor_function(sync_function: typing.Callable[P, T]) -> typing.Callable[P, typing.Awaitable[T]]:
+def executor_function(
+    sync_function: typing.Callable[P, T],
+) -> typing.Callable[P, typing.Awaitable[T]]:
     """A decorator that wraps a sync function in an executor, changing it into an async function.
 
     This allows processing functions to be wrapped and used immediately as an async function.
@@ -70,7 +72,7 @@ def executor_function(sync_function: typing.Callable[P, T]) -> typing.Callable[P
     return sync_wrapper
 
 
-U = typing.TypeVar('U')
+U = typing.TypeVar("U")
 
 
 class AsyncSender(typing.Generic[T, U]):
@@ -102,25 +104,30 @@ class AsyncSender(typing.Generic[T, U]):
         asyncsender received 3
     """
 
-    __slots__ = ('iterator', 'send_value')
+    __slots__ = ("iterator", "send_value")
 
     def __init__(self, iterator: typing.AsyncGenerator[T, typing.Optional[U]]):
         self.iterator = iterator
-        self.send_value: U = None
+        self.send_value: U = None  # type: ignore[reportAttributeAccessIssue]
 
-    def __aiter__(self) -> typing.AsyncGenerator[typing.Tuple[typing.Callable[[typing.Optional[U]], None], T], None]:
-        return self._internal(self.iterator.__aiter__())  # type: ignore
+    def __aiter__(
+        self,
+    ) -> typing.AsyncGenerator[
+        typing.Tuple[typing.Callable[[typing.Optional[U]], None], T], None
+    ]:
+        return self._internal(self.iterator.__aiter__())  # type: ignore[reportArgumentType]
 
     async def _internal(
-        self,
-        base: typing.AsyncGenerator[T, typing.Optional[U]]
-    ) -> typing.AsyncGenerator[typing.Tuple[typing.Callable[[typing.Optional[U]], None], T], None]:
+        self, base: typing.AsyncGenerator[T, typing.Optional[U]]
+    ) -> typing.AsyncGenerator[
+        typing.Tuple[typing.Callable[[typing.Optional[U]], None], T], None
+    ]:
         try:
             while True:
                 # Send the last value to the iterator
                 value = await base.asend(self.send_value)
                 # Reset it incase one is not sent next iteration
-                self.send_value = None
+                self.send_value = None  # type: ignore[reportAttributeAccessIssue]
                 # Yield sender and iterator value
                 yield self.set_send_value, value
         except StopAsyncIteration:
@@ -134,4 +141,4 @@ class AsyncSender(typing.Generic[T, U]):
         not be called directly.
         """
 
-        self.send_value = value
+        self.send_value = value  # type: ignore[reportAttributeAccessIssue]

@@ -27,7 +27,7 @@ __all__ = ('find_extensions_in', 'resolve_extensions', 'package_version', 'Exten
 if typing.TYPE_CHECKING:
     UnbalancedBracesError = ValueError
 else:
-    from braceexpand import UnbalancedBracesError
+    from braceexpand import UnbalancedBracesError # type: ignore[reportUnreachable]
 
 _ExtensionConverterBase = commands.Converter[typing.List[str]]
 

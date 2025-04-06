@@ -1,3 +1,3 @@
-from typing import *  # type: ignore
+from typing import *  # noqa: F403 # type:ignore[reportWildcardImportFromLibrary]
 
-{content}
+{content}  # type:ignore[reportUnusedExpression]  # noqa: F405

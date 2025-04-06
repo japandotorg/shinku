@@ -13,14 +13,14 @@ A discord.py extension including useful tools for bot development and debugging.
 """
 
 # pylint: disable=wildcard-import
-from shinku.cog import *  # noqa: F401
+from shinku.cog import *  # noqa: F401, F403
 from shinku.features.baseclass import Feature  # noqa: F401
 from shinku.flags import Flags  # noqa: F401
-from shinku.meta import *  # noqa: F401
+from shinku.meta import *  # noqa: F401, F403
 
 __all__ = (
-    'shinku',
-    'Feature',
-    'Flags',
-    'setup'
+    "shinku",  # noqa: F405 # type: ignore[reportUnsupportedDunderUsed]
+    "Feature",
+    "Flags",
+    "setup",  # noqa: F405
 )

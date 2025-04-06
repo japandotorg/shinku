@@ -16,7 +16,7 @@ import sys
 import typing
 
 try:
-    from importlib.metadata import distribution, packages_distributions
+    from importlib.metadata import distribution, packages_distributions  # type: ignore[reportAttributeAccessIssue]
 except ImportError:
     from importlib_metadata import distribution, packages_distributions
 
@@ -43,10 +43,11 @@ class RootCommand(Feature):
 
     def __init__(self, *args: typing.Any, **kwargs: typing.Any):
         super().__init__(*args, **kwargs)
-        self.jsk.hidden = Flags.HIDE  # type: ignore
+        self.jsk.hidden = Flags.HIDE  # type: ignore[reportAttributeAccessIssue]
 
-    @Feature.Command(name="shinku", aliases=["jsk"],
-                     invoke_without_command=True, ignore_extra=False)
+    @Feature.Command(
+        name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False
+    )
     async def jsk(self, ctx: ContextA):
         """
         The Sinku debug and diagnostic commands.
@@ -57,24 +58,25 @@ class RootCommand(Feature):
 
         # Try to locate what vends the `discord` package
         distributions: typing.List[str] = [
-            dist for dist in packages_distributions()['discord']  # type: ignore
+            dist
+            for dist in packages_distributions()["discord"]
             if any(
-                file.parts == ('discord', '__init__.py')  # type: ignore
-                for file in distribution(dist).files  # type: ignore
+                file.parts == ("discord", "__init__.py")
+                for file in distribution(dist).files  # type: ignore[reportOptionalIterable]
             )
         ]
 
         if distributions:
-            dist_version = f'{distributions[0]} `{package_version(distributions[0])}`'
+            dist_version = f"{distributions[0]} `{package_version(distributions[0])}`"
         else:
-            dist_version = f'unknown `{discord.__version__}`'
+            dist_version = f"unknown `{discord.__version__}`"
 
         summary = [
             f"Sinku v{package_version('shinku')}, {dist_version}, "
             f"`Python {sys.version}` on `{sys.platform}`".replace("\n", ""),
             f"Module was loaded <t:{self.load_time.timestamp():.0f}:R>, "
             f"cog was loaded <t:{self.start_time.timestamp():.0f}:R>.",
-            ""
+            "",
         ]
 
         # detect if [procinfo] feature is installed
@@ -85,9 +87,11 @@ class RootCommand(Feature):
                 with proc.oneshot():
                     try:
                         mem = proc.memory_full_info()
-                        summary.append(f"Using {natural_size(mem.rss)} physical memory and "
-                                       f"{natural_size(mem.vms)} virtual memory, "
-                                       f"{natural_size(mem.uss)} of which unique to this process.")
+                        summary.append(
+                            f"Using {natural_size(mem.rss)} physical memory and "
+                            f"{natural_size(mem.vms)} virtual memory, "
+                            f"{natural_size(mem.uss)} of which unique to this process."
+                        )
                     except psutil.AccessDenied:
                         pass
 
@@ -96,7 +100,9 @@ class RootCommand(Feature):
                         pid = proc.pid
                         thread_count = proc.num_threads()
 
-                        summary.append(f"Running on PID {pid} (`{name}`) with {thread_count} thread(s).")
+                        summary.append(
+                            f"Running on PID {pid} (`{name}`) with {thread_count} thread(s)."
+                        )
                     except psutil.AccessDenied:
                         pass
 
@@ -119,7 +125,7 @@ class RootCommand(Feature):
                     f" and can see {cache_summary}."
                 )
             else:
-                shard_ids = ', '.join(str(i) for i in self.bot.shards.keys())
+                shard_ids = ", ".join(str(i) for i in self.bot.shards.keys())
                 summary.append(
                     f"This bot is automatically sharded (Shards {shard_ids} of {self.bot.shard_count})"
                     f" and can see {cache_summary}."
@@ -133,21 +139,18 @@ class RootCommand(Feature):
             summary.append(f"This bot is not sharded and can see {cache_summary}.")
 
         # pylint: disable=protected-access
-        if self.bot._connection.max_messages:  # type: ignore
-            message_cache = f"Message cache capped at {self.bot._connection.max_messages}"  # type: ignore
+        if self.bot._connection.max_messages:
+            message_cache = (
+                f"Message cache capped at {self.bot._connection.max_messages}"
+            )
         else:
             message_cache = "Message cache is disabled"
 
-        remarks = {
-            True: 'enabled',
-            False: 'disabled',
-            None: 'unknown'
-        }
+        remarks = {True: "enabled", False: "disabled", None: "unknown"}
 
         *group, last = (
             f"{intent.replace('_', ' ')} intent is {remarks.get(getattr(self.bot.intents, intent, None))}"
-            for intent in
-            ('presences', 'members', 'message_content')
+            for intent in ("presences", "members", "message_content")
         )
 
         summary.append(f"{message_cache}, {', '.join(group)}, and {last}.")
@@ -155,7 +158,9 @@ class RootCommand(Feature):
         # pylint: enable=protected-access
 
         # Show websocket latency in milliseconds
-        summary.append(f"Average websocket latency: {round(self.bot.latency * 1000, 2)}ms")
+        summary.append(
+            f"Average websocket latency: {round(self.bot.latency * 1000, 2)}ms"
+        )
 
         await ctx.send("\n".join(summary))
 
@@ -166,10 +171,10 @@ class RootCommand(Feature):
         Hides Sinku from the help command.
         """
 
-        if self.jsk.hidden:  # type: ignore
+        if self.jsk.hidden:  # type: ignore[reportAttributeAccessIssue]
             return await ctx.send("Sinku is already hidden.")
 
-        self.jsk.hidden = True  # type: ignore
+        self.jsk.hidden = True  # type: ignore[reportAttributeAccessIssue]
         await ctx.send("Sinku is now hidden.")
 
     @Feature.Command(parent="jsk", name="show")
@@ -178,11 +183,12 @@ class RootCommand(Feature):
         Shows Sinku in the help command.
         """
 
-        if not self.jsk.hidden:  # type: ignore
+        if not self.jsk.hidden:  # type: ignore[reportAttributeAccessIssue]
             return await ctx.send("Sinku is already visible.")
 
-        self.jsk.hidden = False  # type: ignore
+        self.jsk.hidden = False  # type: ignore[reportAttributeAccessIssue]
         await ctx.send("Sinku is now visible.")
+
     # pylint: enable=no-member
 
     @Feature.Command(parent="jsk", name="tasks")
@@ -198,11 +204,15 @@ class RootCommand(Feature):
 
         for task in self.tasks:
             if task.ctx.command:
-                paginator.add_line(f"{task.index}: `{task.ctx.command.qualified_name}`, invoked at "
-                                   f"{task.ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')} UTC")
+                paginator.add_line(
+                    f"{task.index}: `{task.ctx.command.qualified_name}`, invoked at "
+                    f"{task.ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                )
             else:
-                paginator.add_line(f"{task.index}: unknown, invoked at "
-                                   f"{task.ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')} UTC")
+                paginator.add_line(
+                    f"{task.index}: unknown, invoked at "
+                    f"{task.ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')} UTC"
+                )
 
         interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
         return await interface.send_to(ctx)
@@ -245,8 +255,12 @@ class RootCommand(Feature):
             task.task.cancel()
 
         if task.ctx.command:
-            await ctx.send(f"Cancelled task {task.index}: `{task.ctx.command.qualified_name}`,"
-                           f" invoked {discord.utils.format_dt(task.ctx.message.created_at, 'R')}")
+            await ctx.send(
+                f"Cancelled task {task.index}: `{task.ctx.command.qualified_name}`,"
+                f" invoked {discord.utils.format_dt(task.ctx.message.created_at, 'R')}"
+            )
         else:
-            await ctx.send(f"Cancelled task {task.index}: unknown,"
-                           f" invoked {discord.utils.format_dt(task.ctx.message.created_at, 'R')}")
+            await ctx.send(
+                f"Cancelled task {task.index}: unknown,"
+                f" invoked {discord.utils.format_dt(task.ctx.message.created_at, 'R')}"
+            )
