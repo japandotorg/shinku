@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.repl internal test
+shinku.repl internal test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -15,7 +16,7 @@ import typing
 
 import pytest
 
-from jishaku.repl import AsyncCodeExecutor, Scope, get_parent_var, get_var_dict_from_ctx
+from shinku.repl import AsyncCodeExecutor, Scope, get_parent_var, get_var_dict_from_ctx
 from tests.utils import mock_ctx
 
 

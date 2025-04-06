@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.baseclass
+shinku.features.baseclass
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The base Feature class that serves as the superclass of all feature components.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -20,7 +21,7 @@ from datetime import datetime, timezone
 from discord.ext import commands
 from typing_extensions import Concatenate, ParamSpec
 
-from jishaku.types import BotT, ContextA
+from shinku.types import BotT, ContextA
 
 __all__ = (
     'Feature',
@@ -54,7 +55,7 @@ GenericFeature = typing.TypeVar('GenericFeature', bound='Feature')
 
 class CommandTask(typing.NamedTuple):
     """
-    A running Jishaku task, wrapping asyncio.Task
+    A running Sinku task, wrapping asyncio.Task
     """
 
     index: int  # type: ignore
@@ -64,7 +65,7 @@ class CommandTask(typing.NamedTuple):
 
 class Feature(commands.Cog):
     """
-    Baseclass defining feature components of the jishaku cog.
+    Baseclass defining feature components of the shinku cog.
     """
 
     class Command(typing.Generic[GenericFeature, P, T]):  # pylint: disable=too-few-public-methods
@@ -214,13 +215,13 @@ class Feature(commands.Cog):
         """
 
         if not await ctx.bot.is_owner(ctx.author):
-            raise commands.NotOwner("You must own this bot to use Jishaku.")
+            raise commands.NotOwner("You must own this bot to use Sinku.")
         return True
 
     @contextlib.contextmanager
     def submit(self, ctx: ContextA):
         """
-        A context-manager that submits the current task to jishaku's task list
+        A context-manager that submits the current task to shinku's task list
         and removes it afterwards.
 
         Parameters

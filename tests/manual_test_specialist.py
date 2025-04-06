@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku manual specialist test
+shinku manual specialist test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This test checks that blockformats look OK and function correctly.
 You should run it in a bash-like shell (that supports ANSI codes).
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
 
 import asyncio
 
-from jishaku.formatting import MultilineFormatter
-from jishaku.repl import AsyncCodeExecutor
-from jishaku.repl.disassembly import get_adaptive_spans
+from shinku.formatting import MultilineFormatter
+from shinku.repl import AsyncCodeExecutor
+from shinku.repl.disassembly import get_adaptive_spans
 
 CODE = '''
 import math

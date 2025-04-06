@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.repl.compilation
+shinku.repl.compilation
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Constants, functions and classes related to classifying, compiling and executing Python code.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -19,9 +20,9 @@ import typing
 
 import import_expression  # type: ignore
 
-from jishaku.functools import AsyncSender
-from jishaku.repl.scope import Scope
-from jishaku.repl.walkers import KeywordTransformer
+from shinku.functools import AsyncSender
+from shinku.repl.scope import Scope
+from shinku.repl.walkers import KeywordTransformer
 
 CORO_CODE = """
 async def _repl_coroutine({0}):
@@ -32,9 +33,9 @@ async def _repl_coroutine({0}):
     from discord.ext import commands
 
     try:
-        import jishaku
+        import shinku
     except ImportError:
-        jishaku = None  # keep working even if in panic recovery mode
+        shinku = None  # keep working even if in panic recovery mode
 
     try:
         pass

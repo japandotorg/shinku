@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.shell
+shinku.features.shell
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku shell commands.
+The shinku shell commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -23,13 +24,13 @@ import discord
 from discord import ui
 from discord.ext import commands
 
-from jishaku.codeblocks import Codeblock, codeblock_converter
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.flags import Flags
-from jishaku.paginators import PaginatorInterface, WrappedPaginator
-from jishaku.shell import ShellReader
-from jishaku.types import ContextA
+from shinku.codeblocks import Codeblock, codeblock_converter
+from shinku.exception_handling import ReplResponseReactor
+from shinku.features.baseclass import Feature
+from shinku.flags import Flags
+from shinku.paginators import PaginatorInterface, WrappedPaginator
+from shinku.shell import ShellReader
+from shinku.types import ContextA
 
 SCAFFOLD_FOLDER = pathlib.Path(__file__).parent / 'scaffolds'
 

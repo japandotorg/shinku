@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.cog loadability and functionality test
+shinku.cog loadability and functionality test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -22,20 +23,20 @@ from tests import utils
 @pytest_asyncio.fixture(
     scope='function',
     params=[
-        ("jishaku", commands.Bot, {}),
-        ("jishaku", commands.Bot, {"shard_id": 0, "shard_count": 2}),
-        ("jishaku", commands.AutoShardedBot, {}),
-        ("jishaku.cog", commands.Bot, {}),
-        ("jishaku.cog", commands.Bot, {"shard_id": 0, "shard_count": 2}),
-        ("jishaku.cog", commands.AutoShardedBot, {}),
+        ("shinku", commands.Bot, {}),
+        ("shinku", commands.Bot, {"shard_id": 0, "shard_count": 2}),
+        ("shinku", commands.AutoShardedBot, {}),
+        ("shinku.cog", commands.Bot, {}),
+        ("shinku.cog", commands.Bot, {"shard_id": 0, "shard_count": 2}),
+        ("shinku.cog", commands.AutoShardedBot, {}),
     ],
     ids=[
-        "jishaku (Bot, unsharded)",
-        "jishaku (Bot, sharded)",
-        "jishaku (AutoShardedBot)",
-        "jishaku.cog (Bot, unsharded)",
-        "jishaku.cog (Bot, sharded)",
-        "jishaku.cog (AutoShardedBot)"
+        "shinku (Bot, unsharded)",
+        "shinku (Bot, sharded)",
+        "shinku (AutoShardedBot)",
+        "shinku.cog (Bot, unsharded)",
+        "shinku.cog (Bot, sharded)",
+        "shinku.cog (AutoShardedBot)"
     ]
 )
 async def bot(request):
@@ -49,8 +50,8 @@ async def bot(request):
 
 @pytest.mark.asyncio
 async def test_loads(bot):
-    assert bot.get_cog("Jishaku")
-    assert isinstance(bot.get_cog("Jishaku"), commands.Cog)
+    assert bot.get_cog("Sinku")
+    assert isinstance(bot.get_cog("Sinku"), commands.Cog)
 
     assert bot.get_command("jsk")
     assert isinstance(bot.get_command("jsk"), commands.Command)
@@ -58,7 +59,7 @@ async def test_loads(bot):
 
 @pytest.mark.asyncio
 async def test_cog_attributes(bot):
-    cog = bot.get_cog("Jishaku")
+    cog = bot.get_cog("Sinku")
 
     cog.retain = False
     assert cog.scope is not cog.scope, "Scope property should give new scopes on no retain"
@@ -89,7 +90,7 @@ async def test_cog_attributes(bot):
 
 @pytest.mark.asyncio
 async def test_cog_check(bot):
-    cog = bot.get_cog("Jishaku")
+    cog = bot.get_cog("Sinku")
 
     with utils.mock_ctx() as ctx:
         with utils.mock_coro(ctx.bot, 'is_owner'):
@@ -105,7 +106,7 @@ async def test_cog_check(bot):
 
 @pytest.mark.asyncio
 async def test_commands(bot):
-    cog = bot.get_cog("Jishaku")
+    cog = bot.get_cog("Sinku")
 
     # test 'jsk'
     with utils.mock_ctx() as ctx:

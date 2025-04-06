@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.hljs test
+shinku.hljs test
 ~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -14,7 +15,7 @@ import typing
 
 import pytest
 
-from jishaku.functools import executor_function
+from shinku.functools import executor_function
 
 
 def sig(*args, **kwargs):

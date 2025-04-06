@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku subclassing functionality test
+shinku subclassing functionality test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -29,9 +30,9 @@ from tests import utils
         ("tests.subclassed_module_2", "Magnet2", "overridden directly", commands.Bot, {"shard_id": 0, "shard_count": 2}),
         ("tests.subclassed_module_2", "Magnet2", "overridden directly", commands.AutoShardedBot, {}),
         # Test that the original still works after the load test
-        ("jishaku", "Jishaku", "Module was loaded", commands.Bot, {}),
-        ("jishaku", "Jishaku", "Module was loaded", commands.Bot, {"shard_id": 0, "shard_count": 2}),
-        ("jishaku", "Jishaku", "Module was loaded", commands.AutoShardedBot, {}),
+        ("shinku", "Sinku", "Module was loaded", commands.Bot, {}),
+        ("shinku", "Sinku", "Module was loaded", commands.Bot, {"shard_id": 0, "shard_count": 2}),
+        ("shinku", "Sinku", "Module was loaded", commands.AutoShardedBot, {}),
     ],
     ids=[
         "Feature-based subclass (Bot, unsharded)",

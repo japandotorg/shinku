@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.python
+shinku.features.python
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku Python evaluation/execution commands.
+The shinku Python evaluation/execution commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -21,16 +22,16 @@ import typing
 
 import discord
 
-from jishaku.codeblocks import Codeblock, codeblock_converter
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.flags import Flags
-from jishaku.formatting import MultilineFormatter
-from jishaku.functools import AsyncSender
-from jishaku.math import format_bargraph, format_stddev
-from jishaku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
-from jishaku.repl import AsyncCodeExecutor, Scope, all_inspections, create_tree, disassemble, get_adaptive_spans, get_var_dict_from_ctx
-from jishaku.types import ContextA
+from shinku.codeblocks import Codeblock, codeblock_converter
+from shinku.exception_handling import ReplResponseReactor
+from shinku.features.baseclass import Feature
+from shinku.flags import Flags
+from shinku.formatting import MultilineFormatter
+from shinku.functools import AsyncSender
+from shinku.math import format_bargraph, format_stddev
+from shinku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
+from shinku.repl import AsyncCodeExecutor, Scope, all_inspections, create_tree, disassemble, get_adaptive_spans, get_var_dict_from_ctx
+from shinku.types import ContextA
 
 try:
     import line_profiler  # type: ignore

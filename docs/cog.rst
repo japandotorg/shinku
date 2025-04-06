@@ -1,34 +1,34 @@
-.. currentmodule:: jishaku
+.. currentmodule:: shinku
 
-jishaku as a cog
+shinku as a cog
 ================
 
 Custom cogs and the Feature framework
 --------------------------------------
 
-The jishaku cog contains commands for bot management, debugging and experimentation.
+The shinku cog contains commands for bot management, debugging and experimentation.
 
 The conventional way to add the cog is by using the module as an extension:
 
 .. code:: python3
 
-    bot.load_extension('jishaku')
+    bot.load_extension('shinku')
     # or
-    await bot.load_extension("jishaku")
+    await bot.load_extension("shinku")
 
-You could also create your own extension to load the ``Jishaku`` cog, but this is not recommended:
+You could also create your own extension to load the ``Sinku`` cog, but this is not recommended:
 
 .. code:: python3
 
-    from jishaku.cog import Jishaku
+    from shinku.cog import Sinku
 
     def setup(bot: commands.Bot):
         # I don't recommend doing this!
-        bot.add_cog(Jishaku(bot=bot))
+        bot.add_cog(Sinku(bot=bot))
 
-If you wish to change or add to the functionality on jishaku for your specific bot, you must use the Features framework to create a new cog.
+If you wish to change or add to the functionality on shinku for your specific bot, you must use the Features framework to create a new cog.
 
-The ``Jishaku`` cog is composited from multiple Features that implement various parts of its functionality.
+The ``shinku`` cog is composited from multiple Features that implement various parts of its functionality.
 When the cog is instantiated, the inherited Features are used to compile the final command tree.
 
 .. image:: /images/features.png
@@ -39,8 +39,8 @@ Here is an example of a simple custom cog using this setup:
 
     from discord.ext import commands
 
-    from jishaku.features.python import PythonFeature
-    from jishaku.features.root_command import RootCommand
+    from shinku.features.python import PythonFeature
+    from shinku.features.root_command import RootCommand
 
     class CustomDebugCog(PythonFeature, RootCommand):
         pass
@@ -52,14 +52,14 @@ This example would give you a cog that includes the ``jsk`` command, the core ta
 
 Using this system, you can selectively include or exclude features you want on your custom Cogs.
 
-``STANDARD_FEATURES`` in ``jishaku.cog`` holds all the features that an installation of jishaku is guaranteed to have by default.
+``STANDARD_FEATURES`` in ``shinku.cog`` holds all the features that an installation of shinku is guaranteed to have by default.
 Thus, you can make a cog without any optional features like so:
 
 .. code:: python3
 
     from discord.ext import commands
 
-    from jishaku.cog import STANDARD_FEATURES
+    from shinku.cog import STANDARD_FEATURES
 
     class CustomDebugCog(*STANDARD_FEATURES):
         pass
@@ -68,7 +68,7 @@ Thus, you can make a cog without any optional features like so:
         bot.add_cog(CustomDebugCog(bot=bot))
 
 ``OPTIONAL_FEATURES``, by contrast, contains Features detected to be supported in this environment.
-The content of it may vary depending on what extras have been installed, or what platform jishaku is running on.
+The content of it may vary depending on what extras have been installed, or what platform shinku is running on.
 
 To use these features as well, simply add them to your cog:
 
@@ -76,7 +76,7 @@ To use these features as well, simply add them to your cog:
 
     from discord.ext import commands
 
-    from jishaku.cog import STANDARD_FEATURES, OPTIONAL_FEATURES
+    from shinku.cog import STANDARD_FEATURES, OPTIONAL_FEATURES
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
         pass
@@ -84,18 +84,18 @@ To use these features as well, simply add them to your cog:
     def setup(bot: commands.Bot):
         bot.add_cog(CustomDebugCog(bot=bot))
 
-This will give you an almost identical cog to the standard Jishaku.
+This will give you an almost identical cog to the standard shinku.
 
 Adding or changing commands
 ----------------------------
 
 If you want to add or change commands in your custom cog, you can use ``Feature.Command``.
 
-This operates in a similar manner to ``commands.command``, but it allows command cross-referencing between different Features, and guarantees individual instances of jishaku cogs will have unique states.
+This operates in a similar manner to ``commands.command``, but it allows command cross-referencing between different Features, and guarantees individual instances of shinku cogs will have unique states.
 
 .. code:: python3
 
-    from jishaku.features.baseclass import Feature
+    from shinku.features.baseclass import Feature
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
         @Feature.Command(parent="jsk", name="foobar")
@@ -120,20 +120,20 @@ If you want to override existing commands, the process is moreorless the same:
 
 Like standard inheritance, this requires the **function name to be the same to work properly**, so keep this in mind.
 
-You can even override the jishaku base command using this method:
+You can even override the shinku base command using this method:
 
 .. code:: python3
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
-        @Feature.Command(name="jishaku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
+        @Feature.Command(name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
         async def jsk(self, ctx: commands.Context):
             await ctx.send("I'm walking on a Star!")
 
-Changing who can use jishaku
+Changing who can use shinku
 -----------------------------
 
-The ``jishaku`` command group has an owner check applied to it and all subcommands.
-To change who can use jishaku, you must change how the owner is determined in your own Bot:
+The ``shinku`` command group has an owner check applied to it and all subcommands.
+To change who can use shinku, you must change how the owner is determined in your own Bot:
 
 .. code:: python3
 
@@ -145,9 +145,9 @@ To change who can use jishaku, you must change how the owner is determined in yo
             # Else fall back to the original
             return await super().is_owner(user)
 
-This is the **sole** supported method of changing who can use jishaku.
+This is the **sole** supported method of changing who can use shinku.
 
-jishaku is a powerful tool - giving people access to it is equivalent to giving them direct access to your computer - so you should make serious consideration for whether you should be overriding who can use it at all.
+shinku is a powerful tool - giving people access to it is equivalent to giving them direct access to your computer - so you should make serious consideration for whether you should be overriding who can use it at all.
 
 Task system
 -----------
@@ -156,7 +156,7 @@ Commands that execute arbitrary code are submitted to a command-task queue so th
 This includes the Python and shell commands.
 
 Please note that this queue is specific to the cog instance.
-If jishaku is reloaded, the command-task queue for the older instance will be lost, even if there are uncancelled command-tasks within it.
+If shinku is reloaded, the command-task queue for the older instance will be lost, even if there are uncancelled command-tasks within it.
 This will make it very difficult to cancel those tasks.
 
 .. py:function:: jsk tasks
@@ -173,9 +173,9 @@ This will make it very difficult to cancel those tasks.
 Python evaluation
 -----------------
 
-.. currentmodule:: jishaku.repl.compilation
+.. currentmodule:: shinku.repl.compilation
 
-Python execution and evaluation is facilitated by jishaku's :class:`AsyncCodeExecutor` backend.
+Python execution and evaluation is facilitated by shinku's :class:`AsyncCodeExecutor` backend.
 
 Code can be passed in as either a single line or a full codeblock:
 
@@ -236,12 +236,12 @@ Example:
 
 These variables are prefixed with underscores to try and reduce accidental shadowing when writing scripts in REPL.
 
-If you don't want the underscores, you can set ``JISHAKU_NO_UNDERSCORE=true`` in your environment variables.
+If you don't want the underscores, you can set ``SHINKU_NO_UNDERSCORE=true`` in your environment variables.
 
 These variables are bound to the local scope and are actively cleaned from the scope on command exit,
 so they don't persist between REPL sessions.
 
-If you want to change this behavior, you can set ``JISHAKU_RETAIN=true``, or,
+If you want to change this behavior, you can set ``SHINKU_RETAIN=true``, or,
 use the ``jsk retain on`` and ``jsk retain off`` commands to toggle variable retention.
 
 
@@ -272,7 +272,7 @@ Commands
 
     Evaluates Python code, returning an inspection of the results.
 
-    .. currentmodule:: jishaku.paginators
+    .. currentmodule:: shinku.paginators
 
     If the inspection fits in a single message, it is sent as a paginator page,
     else it is sent as a :class:`PaginatorInterface`.
@@ -284,7 +284,7 @@ Commands
 
     This operates in a similar manner to :func:`dis.dis`, but in a more accessible form, as it is in an implicit async context and doesn't send to stdout.
 
-    .. currentmodule:: jishaku.paginators
+    .. currentmodule:: shinku.paginators
 
     The output is sent as a file if the sender is detected to be on desktop, else,
     it is always sent as a :class:`PaginatorInterface`.
@@ -294,7 +294,7 @@ Commands
 
     Compiles Python code into its Abstract Syntax Tree using :func:`ast.compile`, and then formats it into a visual ASCII tree, with ANSI support if it is usable.
 
-    .. currentmodule:: jishaku.paginators
+    .. currentmodule:: shinku.paginators
 
     The output is sent as a file if the sender is detected to be on desktop, else,
     it is always sent as a :class:`PaginatorInterface`.
@@ -304,7 +304,7 @@ Commands
 
     Toggles whether variables defined in REPL sessions are retained into future sessions. (OFF by default)
 
-    .. currentmodule:: jishaku.repl.scope
+    .. currentmodule:: shinku.repl.scope
 
     Toggling this on or off will destroy the current :class:`Scope`.
 
@@ -346,7 +346,7 @@ Commands
 
     Matching rules are the same as ``jsk load``.
 
-    Running ``jsk unload ~`` will unload every extension on your bot. This includes jishaku, which may leave you unable to maintain your bot
+    Running ``jsk unload ~`` will unload every extension on your bot. This includes shinku, which may leave you unable to maintain your bot
     until it is restarted. Use with care.
 
     If unloading the extension fails, it will be reported with a traceback.

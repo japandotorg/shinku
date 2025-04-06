@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.math
+shinku.math
 ~~~~~~~~~~~~
 
-Constants and functions related to math and statistical processing for jishaku
+Constants and functions related to math and statistical processing for shinku
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """

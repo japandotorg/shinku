@@ -4,7 +4,8 @@
 """
 MIT License
 
-Copyright (c) 2024 Devon (scarletcafe) R
+Copyright (c) 2025-present japandotorg
+Copyright (c) 2017-2024 Devon (scarletcafe) R
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +92,7 @@ with open('dist_summary.jinja2', 'r', encoding='utf-8') as fp:
 with open('dist/DIST_SUMMARY.md', 'w', encoding='utf-8') as fp:
     output = template.render(
         env=os.getenv,
-        package=importlib.metadata.distribution('jishaku'),
+        package=importlib.metadata.distribution('shinku'),
         files=FILES,
         last_version=last_version,
         commit_hash=commit_hash,

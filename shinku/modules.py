@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.modules
+shinku.modules
 ~~~~~~~~~~~~~~
 
 Functions for managing and searching modules.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -18,7 +19,7 @@ import typing
 from braceexpand import braceexpand
 from discord.ext import commands
 
-from jishaku.types import BotT, ContextA
+from shinku.types import BotT, ContextA
 
 __all__ = ('find_extensions_in', 'resolve_extensions', 'package_version', 'ExtensionConverter')
 

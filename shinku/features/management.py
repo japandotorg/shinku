@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.management
+shinku.features.management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku extension and bot control commands.
+The shinku extension and bot control commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -21,12 +22,12 @@ from urllib.parse import urlencode
 import discord
 from discord.ext import commands
 
-from jishaku.features.baseclass import Feature
-from jishaku.flags import Flags
-from jishaku.math import mean_stddev
-from jishaku.modules import ExtensionConverter
-from jishaku.repl import inspections
-from jishaku.types import ContextA
+from shinku.features.baseclass import Feature
+from shinku.flags import Flags
+from shinku.math import mean_stddev
+from shinku.modules import ExtensionConverter
+from shinku.repl import inspections
+from shinku.types import ContextA
 
 
 class ManagementFeature(Feature):
@@ -46,9 +47,9 @@ class ManagementFeature(Feature):
 
         paginator = commands.Paginator(prefix='', suffix='')
 
-        # 'jsk reload' on its own just reloads jishaku
+        # 'jsk reload' on its own just reloads shinku
         if ctx.invoked_with == 'reload' and not extensions:
-            extensions = [['jishaku']]
+            extensions = [['shinku']]
 
         for extension in itertools.chain(*extensions):
             method, icon = (

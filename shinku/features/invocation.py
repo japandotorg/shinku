@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.invocation
+shinku.features.invocation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku command invocation related commands.
+The shinku command invocation related commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -22,11 +23,11 @@ import typing
 import discord
 from discord.ext import commands
 
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.models import copy_context_with
-from jishaku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
-from jishaku.types import ContextA, ContextT
+from shinku.exception_handling import ReplResponseReactor
+from shinku.features.baseclass import Feature
+from shinku.models import copy_context_with
+from shinku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
+from shinku.types import ContextA, ContextT
 
 UserIDConverter = commands.IDConverter[typing.Union[discord.Member, discord.User]]
 ChannelIDConverter = commands.IDConverter[

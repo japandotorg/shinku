@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.repl.repl_builtins
+shinku.repl.repl_builtins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Builtin functions and variables within Jishaku REPL contexts.
+Builtin functions and variables within Sinku REPL contexts.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -16,7 +17,7 @@ import typing
 import aiohttp
 import discord
 
-from jishaku.types import ContextA
+from shinku.types import ContextA
 
 
 async def http_get_bytes(*args: typing.Any, **kwargs: typing.Any) -> bytes:

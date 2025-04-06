@@ -1,24 +1,24 @@
-jishaku {{ package.version }}
+shinku {{ package.version }}
 
-https://pypi.org/project/jishaku/{{ package.version }}/
+https://pypi.org/project/shinku/{{ package.version }}/
 {{ env('GITHUB_SERVER_URL') }}/{{ env('GITHUB_REPOSITORY') }}/tree/{{ env('tag_name') }}
 
-https://jishaku.readthedocs.io/en/latest/whatsnew.html#version-{{ package.version.replace('.', '-') }}
+https://shinku.readthedocs.io/en/latest/whatsnew.html#version-{{ package.version.replace('.', '-') }}
 
 Built by {{ env('GITHUB_SERVER_URL') }}/{{ env('GITHUB_REPOSITORY') }}/actions/runs/{{ env('GITHUB_RUN_ID') }} (triggered by {{ env('GITHUB_ACTOR') }})
 
 [New commits since {{ last_version }}]({{ env('GITHUB_SERVER_URL') }}/{{ env('GITHUB_REPOSITORY') }}/compare/{{ last_version }}...{{ commit_hash }})
 
-It is advised that you install jishaku directly through the pip package manager.
+It is advised that you install shinku directly through the pip package manager.
 
-Install the latest version of jishaku:
+Install the latest version of shinku:
 ```bash
-pip install -U jishaku
+pip install -U shinku
 ```
 
-Install specifically this version of jishaku (not recommended):
+Install specifically this version of shinku (not recommended):
 ```bash
-pip install -U jishaku=={{ package.version }}
+pip install -U shinku=={{ package.version }}
 ```
 
 Artifacts are included with this release for debugging convenience.

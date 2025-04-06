@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.root_command
+shinku.features.root_command
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku root command.
+The shinku root command.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -22,12 +23,12 @@ except ImportError:
 import discord
 from discord.ext import commands
 
-from jishaku.features.baseclass import Feature
-from jishaku.flags import Flags
-from jishaku.math import natural_size
-from jishaku.modules import package_version
-from jishaku.paginators import PaginatorInterface
-from jishaku.types import ContextA
+from shinku.features.baseclass import Feature
+from shinku.flags import Flags
+from shinku.math import natural_size
+from shinku.modules import package_version
+from shinku.paginators import PaginatorInterface
+from shinku.types import ContextA
 
 try:
     import psutil
@@ -44,11 +45,11 @@ class RootCommand(Feature):
         super().__init__(*args, **kwargs)
         self.jsk.hidden = Flags.HIDE  # type: ignore
 
-    @Feature.Command(name="jishaku", aliases=["jsk"],
+    @Feature.Command(name="shinku", aliases=["jsk"],
                      invoke_without_command=True, ignore_extra=False)
     async def jsk(self, ctx: ContextA):
         """
-        The Jishaku debug and diagnostic commands.
+        The Sinku debug and diagnostic commands.
 
         This command on its own gives a status brief.
         All other functionality is within its subcommands.
@@ -69,7 +70,7 @@ class RootCommand(Feature):
             dist_version = f'unknown `{discord.__version__}`'
 
         summary = [
-            f"Jishaku v{package_version('jishaku')}, {dist_version}, "
+            f"Sinku v{package_version('shinku')}, {dist_version}, "
             f"`Python {sys.version}` on `{sys.platform}`".replace("\n", ""),
             f"Module was loaded <t:{self.load_time.timestamp():.0f}:R>, "
             f"cog was loaded <t:{self.start_time.timestamp():.0f}:R>.",
@@ -162,32 +163,32 @@ class RootCommand(Feature):
     @Feature.Command(parent="jsk", name="hide")
     async def jsk_hide(self, ctx: ContextA):
         """
-        Hides Jishaku from the help command.
+        Hides Sinku from the help command.
         """
 
         if self.jsk.hidden:  # type: ignore
-            return await ctx.send("Jishaku is already hidden.")
+            return await ctx.send("Sinku is already hidden.")
 
         self.jsk.hidden = True  # type: ignore
-        await ctx.send("Jishaku is now hidden.")
+        await ctx.send("Sinku is now hidden.")
 
     @Feature.Command(parent="jsk", name="show")
     async def jsk_show(self, ctx: ContextA):
         """
-        Shows Jishaku in the help command.
+        Shows Sinku in the help command.
         """
 
         if not self.jsk.hidden:  # type: ignore
-            return await ctx.send("Jishaku is already visible.")
+            return await ctx.send("Sinku is already visible.")
 
         self.jsk.hidden = False  # type: ignore
-        await ctx.send("Jishaku is now visible.")
+        await ctx.send("Sinku is now visible.")
     # pylint: enable=no-member
 
     @Feature.Command(parent="jsk", name="tasks")
     async def jsk_tasks(self, ctx: ContextA):
         """
-        Shows the currently running jishaku tasks.
+        Shows the currently running shinku tasks.
         """
 
         if not self.tasks:

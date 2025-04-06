@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.sql
+shinku.features.sql
 ~~~~~~~~~~~~~~~~~~~~
 
-The jishaku SQL-related commands and utilities.
+The shinku SQL-related commands and utilities.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -19,10 +20,10 @@ import typing
 import discord
 from tabulate import tabulate
 
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
-from jishaku.types import ContextA
+from shinku.exception_handling import ReplResponseReactor
+from shinku.features.baseclass import Feature
+from shinku.paginators import PaginatorInterface, WrappedPaginator, use_file_check
+from shinku.types import ContextA
 
 T = typing.TypeVar('T')
 

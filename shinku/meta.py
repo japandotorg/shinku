@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.meta
+shinku.meta
 ~~~~~~~~~~~~
 
-Meta information about jishaku.
+Meta information about shinku.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -25,7 +26,7 @@ __all__ = (
 
 
 class VersionInfo(typing.NamedTuple):
-    """Version info named tuple for Jishaku"""
+    """Version info named tuple for Sinku"""
     major: int
     minor: int
     micro: int
@@ -35,9 +36,9 @@ class VersionInfo(typing.NamedTuple):
 
 version_info = VersionInfo(major=2, minor=6, micro=0, releaselevel='final', serial=0)
 
-__author__ = 'scarletcafe'
-__copyright__ = 'Copyright 2021 Devon (scarletcafe) R'
+__author__ = 'japandotorg'
+__copyright__ = 'Copyright 2025-present japandotorg'
 __docformat__ = 'restructuredtext en'
 __license__ = 'MIT'
-__title__ = 'jishaku'
+__title__ = 'shinku'
 __version__ = '.'.join(map(str, (version_info.major, version_info.minor, version_info.micro)))

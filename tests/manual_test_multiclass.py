@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku manual multiclass test
+shinku manual multiclass test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is a manually-activated test designed to determine if independent
-subclasses of Jishaku can run simultaneously on the same event loop
+subclasses of Sinku can run simultaneously on the same event loop
 without conflicting with eachother.
 
 Execute this test from the repository using:
 python -m tests.manual_test_multiclass "$BOT_TOKEN"
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -29,7 +30,7 @@ from discord.ext import commands
 LOADABLES = (
     ('j!1 ', 'tests.subclassed_module_1'),
     ('j!2 ', 'tests.subclassed_module_2'),
-    ('j!n ', 'jishaku'),
+    ('j!n ', 'shinku'),
 )
 
 

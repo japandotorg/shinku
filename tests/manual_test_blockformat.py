@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku manual blockformat test
+shinku manual blockformat test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This test checks that blockformats look OK and function correctly.
 You should run it in a bash-like shell (that supports ANSI codes).
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
 
 import inspect
 
-from jishaku.formatting import LineFormatter, MultilineFormatter
+from shinku.formatting import LineFormatter, MultilineFormatter
 
 if __name__ == '__main__':
     print("== No Annotations Test ==")

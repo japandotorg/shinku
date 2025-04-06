@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku converter test
+shinku converter test
 ~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
 
 import inspect
 
-from jishaku.codeblocks import Codeblock, codeblock_converter
+from shinku.codeblocks import Codeblock, codeblock_converter
 
 
 def test_codeblock_converter():

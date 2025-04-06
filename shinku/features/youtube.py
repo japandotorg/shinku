@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.youtube
+shinku.features.youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku youtube-dl command.
+The shinku youtube-dl command.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -15,15 +16,15 @@ import typing
 
 import discord
 
-from jishaku.types import ContextA
+from shinku.types import ContextA
 
 try:
     import yt_dlp as youtube_dl  # type: ignore
 except ImportError:
     import youtube_dl  # type: ignore
 
-from jishaku.features.baseclass import Feature
-from jishaku.features.voice import VoiceFeature
+from shinku.features.baseclass import Feature
+from shinku.features.voice import VoiceFeature
 
 BASIC_OPTS = {
     'format': 'webm[abr>0]/bestaudio/best',

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.repl.inspections
+shinku.repl.inspections
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Inspections performable on Python objects.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -38,13 +39,13 @@ def add_inspection(name: str) -> typing.Callable[
     typing.Callable[P, T]
 ]:
     """
-    Add a Jishaku object inspection
+    Add a Sinku object inspection
     """
 
     # create the real decorator
     def inspection_inner(func: typing.Callable[P, T]):
         """
-        Jishaku inspection decorator
+        Sinku inspection decorator
         """
 
         # pylint: disable=inconsistent-return-statements
@@ -64,7 +65,7 @@ def add_inspection(name: str) -> typing.Callable[
 
 def all_inspections(obj: typing.Any):
     """
-    Generator to iterate all current Jishaku inspections.
+    Generator to iterate all current Sinku inspections.
     """
 
     for name, callback in INSPECTIONS:

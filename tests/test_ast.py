@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku ast tree generation test
+shinku ast tree generation test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:copyright: (c) 2022 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
 
 import inspect
 
-from jishaku.repl.disassembly import create_tree
+from shinku.repl.disassembly import create_tree
 
 
 def test_ast_missing_fields():

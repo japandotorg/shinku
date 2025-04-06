@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.models
+shinku.models
 ~~~~~~~~~~~~~~
 
 Functions for modifying or interfacing with discord.py models.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -16,7 +17,7 @@ import typing
 
 import discord
 
-from jishaku.types import ContextT
+from shinku.types import ContextT
 
 
 async def copy_context_with(

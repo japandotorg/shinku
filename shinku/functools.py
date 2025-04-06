@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.functools
+shinku.functools
 ~~~~~~~~~~~~~~~~~
 
-Function-related tools for Jishaku.
+Function-related tools for Sinku.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -36,7 +37,7 @@ def executor_function(sync_function: typing.Callable[P, T]) -> typing.Callable[P
         from io import BytesIO
         from PIL import Image
 
-        from jishaku.functools import executor_function
+        from shinku.functools import executor_function
 
 
         @executor_function

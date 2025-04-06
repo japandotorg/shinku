@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.guild
+shinku.features.guild
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku guild-related commands.
+The shinku guild-related commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -15,8 +16,8 @@ import typing
 
 import discord
 
-from jishaku.features.baseclass import Feature
-from jishaku.types import ContextA
+from shinku.features.baseclass import Feature
+from shinku.types import ContextA
 
 T = typing.TypeVar('T')
 

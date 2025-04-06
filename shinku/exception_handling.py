@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.exception_handling
+shinku.exception_handling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions and classes for handling exceptions.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -21,7 +22,7 @@ import discord
 from discord.ext import commands
 from typing_extensions import ParamSpec
 
-from jishaku.flags import Flags
+from shinku.flags import Flags
 
 
 async def send_traceback(

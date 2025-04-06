@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.voice
+shinku.features.voice
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku core voice-related commands.
+The shinku core voice-related commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -17,8 +18,8 @@ import discord
 import discord.opus
 import discord.voice_client
 
-from jishaku.features.baseclass import Feature
-from jishaku.types import ContextA
+from shinku.features.baseclass import Feature
+from shinku.types import ContextA
 
 
 class VoiceFeature(Feature):

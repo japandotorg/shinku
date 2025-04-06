@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.features.filesystem
+shinku.features.filesystem
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The jishaku filesystem-related commands.
+The shinku filesystem-related commands.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -19,11 +20,11 @@ import re
 import aiohttp
 import discord
 
-from jishaku.exception_handling import ReplResponseReactor
-from jishaku.features.baseclass import Feature
-from jishaku.hljs import get_language, guess_file_traits
-from jishaku.paginators import PaginatorInterface, WrappedFilePaginator, use_file_check
-from jishaku.types import ContextA
+from shinku.exception_handling import ReplResponseReactor
+from shinku.features.baseclass import Feature
+from shinku.hljs import get_language, guess_file_traits
+from shinku.paginators import PaginatorInterface, WrappedFilePaginator, use_file_check
+from shinku.types import ContextA
 
 
 class FilesystemFeature(Feature):

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.repl.disassembly
+shinku.repl.disassembly
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions pertaining to the disassembly of Python code
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -20,7 +21,7 @@ import typing
 import import_expression  # type: ignore
 import opcode
 
-from jishaku.repl.scope import Scope
+from shinku.repl.scope import Scope
 
 CORO_CODE = """
 import asyncio
@@ -28,7 +29,7 @@ import asyncio
 import discord
 from discord.ext import commands
 
-import jishaku
+import shinku
 
 async def _repl_coroutine({0}):
     pass
@@ -39,7 +40,7 @@ def wrap_code(code: str, args: str = '') -> ast.Module:
     """
     Wraps code for disassembly.
 
-    This is similar in function to the jishaku.repl.compilation equivalent,
+    This is similar in function to the shinku.repl.compilation equivalent,
     but due to the different structure required for clean disassemblies,
     it's implemented separately here.
     """

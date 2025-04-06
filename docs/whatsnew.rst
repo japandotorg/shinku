@@ -1,4 +1,4 @@
-.. currentmodule:: jishaku
+.. currentmodule:: shinku
 
 What's new?
 ================
@@ -9,7 +9,7 @@ Version 2.6.0
 My username has changed. This version fixes package metadata associated with this as well as bringing the following (long-overdue) changes:
 
 - The ``jsk sql`` command, which will try to identify SQL adapters on your bot and provide an interface for using them.
-- ``python -m jishaku`` will now attempt to copy the automatically generated bot prefix to your clipboard if the appropriate libraries are installed.
+- ``python -m shinku`` will now attempt to copy the automatically generated bot prefix to your clipboard if the appropriate libraries are installed.
 - Support for translations in ``jsk sync``
 - ``jsk cancel`` now uses Discord markdown timestamps to indicate when tasks were started.
 - ``jsk specialist`` works like `specialist <https://pypi.org/project/specialist/>`_ by executing Python code and reporting areas in which Python 3.11+ optimizations apply.
@@ -23,7 +23,7 @@ Version 2.5.2
 
 This version is a **backport release** to fix 3.12 and some other long-standing compatibility bugs.
 
-This **does not** contain any new features from master - it is a special bug fix only release. You can see the exact changes by `comparing tags on GitHub <https://github.com/scarletcafe/jishaku/compare/2.5.1...2.5.2>`_.
+This **does not** contain any new features from master - it is a special bug fix only release. You can see the exact changes by `comparing tags on GitHub <https://github.com/japandotorg/shinku/compare/2.5.1...2.5.2>`_.
 
 Version 2.5.1
 -------------
@@ -33,7 +33,7 @@ This version includes:
 - Some fixes for changes that broke existing fork support
 - A fix for ``jsk pip`` that tries to select the right pip for the current Python when a venv is not correctly activated.
 - Additional shortcut 'scaffold' methods that allow you to easily leverage some compilers/interpreters via the shell when detected.
-- If a REPL (``jsk py``, etc) contains mentions and fails to compile as is, jishaku will attempt to substitute the mentions with a respective object. This allows you to use mentions as literals when not in a codeblock.
+- If a REPL (``jsk py``, etc) contains mentions and fails to compile as is, shinku will attempt to substitute the mentions with a respective object. This allows you to use mentions as literals when not in a codeblock.
 - Some reaction-related functionality has been adjusted to try and avoid sending reactions when it's not necessary. This is to account for the new, slower, reaction rate limits. Note that some of these benefits only apply to 2.0a+ users.
 - An experimental ``jsk timeit`` command that attempts to do line-based timing evaluation of Python code. This isn't super reliable as is, and generally should not be used for small or absolute measurements, but rather to find large snags that could be bottlenecking.
 
@@ -50,14 +50,14 @@ Version 2.4.0
 
 discord.py has now resumed development, and this version allows the cog to be loaded with the new 2.0a async load strategy.
 
-As it stands, jishaku will now once again handle discord.py as its first class priority for support.
-However, jishaku will still **no longer serve discord.py as a requirement** and fork-specific fixes up to this point will remain, with future ones still being considered based on their impact.
+As it stands, shinku will now once again handle discord.py as its first class priority for support.
+However, shinku will still **no longer serve discord.py as a requirement** and fork-specific fixes up to this point will remain, with future ones still being considered based on their impact.
 
-It is still thus up to you what you decide to use with jishaku, and the module will not make this choice for you, but be aware that discord.py-related bugs will be prioritized for fixes over other implementations.
+It is still thus up to you what you decide to use with shinku, and the module will not make this choice for you, but be aware that discord.py-related bugs will be prioritized for fixes over other implementations.
 
 New stuff in this release:
 
-- jishaku will now correctly provide and use async setup/add_cog/load_extension on 2.0a
+- shinku will now correctly provide and use async setup/add_cog/load_extension on 2.0a
 - ``__main__`` has been improved to allow you to specify a log file to output to in addition to stdout.
 - ``WrappedPaginator`` performance has been improved over tenfold, reducing lag from extremely large outputs
 - The ``jsk sync`` command has been added, allowing you to sync either your global or guild-specific app_commands.
@@ -87,21 +87,21 @@ This is a patch release to fix a number of issues with permtrace and improve ``_
 Version 2.3.0
 -------------
 
-As discord.py development has ceased, this update serves to set the expectations for Jishaku going forward.
+As discord.py development has ceased, this update serves to set the expectations for Sinku going forward.
 
 I have already gone over everything in my README writeup, so I will reproduce it here for your convenience.
 
     As of the 27th of August 2021, `discord.py has ceased development <https://gist.github.com/Rapptz/4a2f62751b9600a31a0d3c78100287f1>`_.
 
-    Jishaku will continue to be maintained targeting both the PyPI version and the `latest git revision <https://github.com/Rapptz/discord.py/tree/45d498c1b76deaf3b394d17ccf56112fa691d160>`_ as of the archive, until at least the date of the slash command mandate (currently speculated to be around April 2022).
+    Sinku will continue to be maintained targeting both the PyPI version and the `latest git revision <https://github.com/Rapptz/discord.py/tree/45d498c1b76deaf3b394d17ccf56112fa691d160>`_ as of the archive, until at least the date of the slash command mandate (currently speculated to be around April 2022).
 
     As all trusted contributors have rejected continuing the library, I do not have enough trust in any forks to target those instead. The existing forks are handled by inexperienced developers, and I figure this will continue to be the case in the future, as all of the developers experienced enough to carry the torch do not want to maintain the library for similar reasons to Danny himself.
 
-    However, if you personally decide that you wish to use a fork, I will allow Jishaku to honor your decision by removing the ``discord.py`` package requirement. **This means, from now on, installing jishaku will not automatically handle installing discord.py, you must choose a version to use yourself**. Any fork that you use must be compatible with the original (in that it supplies the ``discord`` module and its namespaces).
+    However, if you personally decide that you wish to use a fork, I will allow Sinku to honor your decision by removing the ``discord.py`` package requirement. **This means, from now on, installing shinku will not automatically handle installing discord.py, you must choose a version to use yourself**. Any fork that you use must be compatible with the original (in that it supplies the ``discord`` module and its namespaces).
 
-    When April 2022 comes, I will make a decision at the time as to whether I want to continue maintaining Jishaku. I still enjoy making and maintaining bots, but implementing Jishaku under the philosophies I have defined so far will likely be impossible under the new slash commands, and I don't really want to compromise my work for the sake of appeasing a company that doesn't care for its developers.
+    When April 2022 comes, I will make a decision at the time as to whether I want to continue maintaining Sinku. I still enjoy making and maintaining bots, but implementing Sinku under the philosophies I have defined so far will likely be impossible under the new slash commands, and I don't really want to compromise my work for the sake of appeasing a company that doesn't care for its developers.
 
-    I hope you've found Jishaku useful, and hopefully it will get to live on in one way or another.
+    I hope you've found Sinku useful, and hopefully it will get to live on in one way or another.
 
 
 Version 2.2.0
@@ -122,17 +122,17 @@ Example of how the commands change with this release:
 This allows combinations that were previously not possible, for example,
 ``jsk exec! #channel @user command`` now executes a command as a user in another channel or thread, bypassing any checks or cooldowns that user or channel has against the command.
 
-The flag system (i.e. the ``JISHAKU_FLAG=...`` system) has been rewritten to use various degrees of lazy evaluation.
-This means setting flags like ``JISHAKU_HIDE`` and ``JISHAKU_RETAIN`` need only precede loading the Jishaku extension, as opposed to the entire module.
+The flag system (i.e. the ``SHINKU_FLAG=...`` system) has been rewritten to use various degrees of lazy evaluation.
+This means setting flags like ``SHINKU_HIDE`` and ``SHINKU_RETAIN`` need only precede loading the Sinku extension, as opposed to the entire module.
 
 Flags that only evaluated at command runtime will now have their changes take effect immediately.
-For example, executing ``os.environ['JISHAKU_NO_UNDERSCORE'] = '1'`` no longer requires a reload to take effect.
+For example, executing ``os.environ['SHINKU_NO_UNDERSCORE'] = '1'`` no longer requires a reload to take effect.
 
 A programmatic interface for flags is available, however, its use is discouraged except in subclass initialization, due to the fact that the changes will **NOT** persist across reloads of the extension.
 
 .. code:: python3
 
-    jishaku.Flags.NO_UNDERSCORE = True
+    shinku.Flags.NO_UNDERSCORE = True
 
 The ``jsk invite`` command has been added, which is a developer convenience command that supplies the invite link for the bot it is ran on.
 This command is most useful for bots that predate the behavior change that merged bot and application IDs, saving the time of having to retrieve the application ID yourself.
@@ -149,8 +149,8 @@ Version 2.1.0
 A new implementation of PaginatorInterface has been created using Discord's interaction buttons system.
 It is available when using discord.py 2.0.0 or greater (currently alpha).
 
-Jishaku will now avoid uploading files either when detecting the author is on mobile or through an explicit ``JISHAKU_FORCE_PAGINATOR`` switch.
-This is to better support mobile platforms that do not have inline file previews yet. (`PR #111 <https://github.com/scarletcafe/jishaku/pull/111>`_).
+Sinku will now avoid uploading files either when detecting the author is on mobile or through an explicit ``SHINKU_FORCE_PAGINATOR`` switch.
+This is to better support mobile platforms that do not have inline file previews yet. (`PR #111 <https://github.com/japandotorg/shinku/pull/111>`_).
 
 Humanize has been removed as a dependency. Selftest now uses Discord's own relative timestamp formatting markdown extension for timing,
 and pretty printing of memory usage has been implemented within the Feature itself.
@@ -161,7 +161,7 @@ Version 2.0.0
 Python version changes
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Python version 3.7 has been dropped. Jishaku 2.0 requires Python 3.8 or greater.
+Python version 3.7 has been dropped. Sinku 2.0 requires Python 3.8 or greater.
 
 New commands
 ~~~~~~~~~~~~~
@@ -214,10 +214,10 @@ API changes
 ~~~~~~~~~~~~
 
 - Feature system
-    The Feature system has been implemented as a means to solve subclassing problems with Jishaku.
+    The Feature system has been implemented as a means to solve subclassing problems with Sinku.
 
     Certain functionality can now be disabled in subclasses, additional commands can be easily facilitated
-    without affecting the native Jishaku cog, and overriding subcommands or groups is now possible without
+    without affecting the native Sinku cog, and overriding subcommands or groups is now possible without
     needing to reimplement commands that would otherwise become orphaned in the process.
 
 - PaginatorInterface

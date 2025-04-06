@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku subclassing test 2
+shinku subclassing test 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is a valid extension file for discord.py intended to
@@ -9,23 +9,24 @@ discover weird behaviors related to subclassing.
 
 This variant overrides behavior directly.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
 
 from discord.ext import commands
 
-import jishaku
-from jishaku.types import ContextT
+import shinku
+from shinku.types import ContextT
 
 
-class Magnet2(*jishaku.OPTIONAL_FEATURES, *jishaku.STANDARD_FEATURES):  # pylint: disable=too-few-public-methods
+class Magnet2(*shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES):  # pylint: disable=too-few-public-methods
     """
-    The extended Jishaku cog
+    The extended Sinku cog
     """
 
-    @jishaku.Feature.Command(name="jishaku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
+    @shinku.Feature.Command(name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
     async def jsk(self, ctx: ContextT):
         """
         override test

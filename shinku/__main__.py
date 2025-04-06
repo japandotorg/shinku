@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.__main__
+shinku.__main__
 ~~~~~~~~~~~~~~~~~
 
-This is an entrypoint that sets up a basic Bot with Jishaku.
+This is an entrypoint that sets up a basic Bot with Sinku.
 It has console logging set up and uses a mention prefix.
 
 This is mostly intended to be a quick means to have a debuggable bot from a token.
-It can be used to perform manual administrative actions as the bot, or to test Jishaku itself.
+It can be used to perform manual administrative actions as the bot, or to test Sinku itself.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -29,7 +30,7 @@ LOG_FORMAT: logging.Formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(n
 LOG_STREAM: logging.Handler = logging.StreamHandler(stream=sys.stdout)
 LOG_STREAM.setFormatter(LOG_FORMAT)
 
-LOGGER = logging.getLogger('jishaku.__main__')
+LOGGER = logging.getLogger('shinku.__main__')
 
 
 async def entry(bot: commands.Bot, *args: typing.Any, **kwargs: typing.Any):
@@ -39,8 +40,8 @@ async def entry(bot: commands.Bot, *args: typing.Any, **kwargs: typing.Any):
 
     LOGGER.critical("Beginning async context")
     async with bot:
-        LOGGER.critical("Loading jishaku")
-        await bot.load_extension('jishaku')
+        LOGGER.critical("Loading shinku")
+        await bot.load_extension('shinku')
 
         for extension in bot.extensions_to_load:  # type: ignore
             extension: str
@@ -49,7 +50,7 @@ async def entry(bot: commands.Bot, *args: typing.Any, **kwargs: typing.Any):
 
         LOGGER.critical(
             'Generated a unique UUID for this session: %s'
-            '\nYou can use Jishaku with your bot once it starts using `%s::jsk <subcommand>`'
+            '\nYou can use Sinku with your bot once it starts using `%s::jsk <subcommand>`'
             '\nIf you have no message content, you can prefix it with the mention: `@Bot %s::jsk <subcommand>`',
             bot.unique_id, bot.unique_id, bot.unique_id  # type: ignore
         )
@@ -98,14 +99,14 @@ def entrypoint(
     skip_wait: bool = False
 ):
     """
-    Entrypoint accessible through `python -m jishaku <TOKEN>`
+    Entrypoint accessible through `python -m shinku <TOKEN>`
 
     Specify intents using + and - before the token
     E.g.:
-        -m jishaku -- +all -message_content <TOKEN>
+        -m shinku -- +all -message_content <TOKEN>
     Arguments are applied in order.
     You can also set log level and output to a file:
-        -m jishaku --log-level INFO --log-file bot.log -- +all <TOKEN>
+        -m shinku --log-level INFO --log-file bot.log -- +all <TOKEN>
     """
 
     logger = logging.getLogger()

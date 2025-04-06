@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.flags
+shinku.flags
 ~~~~~~~~~~~~~~
 
-The Jishaku cog base, which contains most of the actual functionality of Jishaku.
+The Sinku cog base, which contains most of the actual functionality of Sinku.
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -18,7 +19,7 @@ import typing
 
 import discord
 
-from jishaku.types import ContextA
+from shinku.types import ContextA
 
 ENABLED_SYMBOLS = ("true", "t", "yes", "y", "on", "1")
 DISABLED_SYMBOLS = ("false", "f", "no", "n", "off", "0")
@@ -30,7 +31,7 @@ FlagHandler = typing.Optional[typing.Callable[['FlagMeta'], typing.Any]]
 @dataclasses.dataclass
 class Flag:
     """
-    Dataclass that represents a Jishaku flag state. Only for internal use.
+    Dataclass that represents a Sinku flag state. Only for internal use.
     """
 
     name: str
@@ -49,7 +50,7 @@ class Flag:
             return self.override
 
         # Resolve from environment
-        env_value = os.getenv(f"JISHAKU_{self.name}", "").strip()
+        env_value = os.getenv(f"SHINKU_{self.name}", "").strip()
 
         if env_value:
             if self.flag_type is bool:
@@ -136,15 +137,15 @@ class FlagMeta(type):
 
 class Flags(metaclass=FlagMeta):  # pylint: disable=too-few-public-methods
     """
-    The flags for Jishaku.
+    The flags for Sinku.
 
     You can override these either through your environment, e.g.:
-        export JISHAKU_HIDE=1
+        export SHINKU_HIDE=1
     Or you can override them programmatically:
-        jishaku.Flags.HIDE = True
+        shinku.Flags.HIDE = True
     """
 
-    # Flag to indicate the Jishaku base command group should be hidden
+    # Flag to indicate the Sinku base command group should be hidden
     HIDE: bool
 
     # Flag to indicate that retention mode for REPL should be enabled by default
@@ -153,7 +154,7 @@ class Flags(metaclass=FlagMeta):  # pylint: disable=too-few-public-methods
     # Flag to indicate that meta variables in REPL should not be prefixed with an underscore
     NO_UNDERSCORE: bool
 
-    # The scope prefix, i.e. the prefix that appears before Jishaku's builtin variables in REPL sessions.
+    # The scope prefix, i.e. the prefix that appears before Sinku's builtin variables in REPL sessions.
     # It is recommended that you set this programatically.
     SCOPE_PREFIX: str = lambda flags: '' if flags.NO_UNDERSCORE else '_'  # type: ignore
 

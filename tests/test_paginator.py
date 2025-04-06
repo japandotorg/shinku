@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku converter test
+shinku converter test
 ~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -14,7 +15,7 @@ from io import BytesIO
 
 import pytest
 
-from jishaku.paginators import FilePaginator, WrappedPaginator
+from shinku.paginators import FilePaginator, WrappedPaginator
 
 
 def test_file_paginator():

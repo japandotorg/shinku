@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-jishaku.inspections test
+shinku.inspections test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2021 Devon (scarletcafe) R
+:copyright: (c) 2025-present japandotorg
+:copyright: (c) 2017-2024 Devon (scarletcafe) R
 :license: MIT, see LICENSE for more details.
 
 """
@@ -15,7 +16,7 @@ import typing
 import discord
 import pytest
 
-from jishaku.repl.inspections import all_inspections
+from shinku.repl.inspections import all_inspections
 from tests.utils import sentinel
 
 
