@@ -48,7 +48,7 @@ Here is an example of a simple custom cog using this setup:
     def setup(bot: commands.Bot):
         bot.add_cog(CustomDebugCog(bot=bot))
 
-This example would give you a cog that includes the ``jsk`` command, the core task system, and the Python commands, but nothing else.
+This example would give you a cog that includes the ``shin`` command, the core task system, and the Python commands, but nothing else.
 
 Using this system, you can selectively include or exclude features you want on your custom Cogs.
 
@@ -98,14 +98,14 @@ This operates in a similar manner to ``commands.command``, but it allows command
     from shinku.features.baseclass import Feature
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
-        @Feature.Command(parent="jsk", name="foobar")
-        async def jsk_foobar(self, ctx: commands.Context):
+        @Feature.Command(parent="shin", name="foobar")
+        async def shin_foobar(self, ctx: commands.Context):
             await ctx.send("Hello there!")
 
 The ``parent`` argument refers to what command parents this one, and works across Features.
 The name used in it is the **function name of the callback for the command**, not the command's name itself, so please keep this in mind.
 
-If you need to check what the name of a command you want to parent against is, you can use ``jsk source jsk <whatever>``.
+If you need to check what the name of a command you want to parent against is, you can use ``shin source shin <whatever>``.
 
 Commands that have children when the cog is instantiated will be automatically turned into ``Group`` s, and this applies for subcommands of subcommands and etc.
 
@@ -114,8 +114,8 @@ If you want to override existing commands, the process is moreorless the same:
 .. code:: python3
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
-        @Feature.Command(parent="jsk", name="debug")
-        async def jsk_debug(self, ctx: commands.Context):
+        @Feature.Command(parent="shin", name="debug")
+        async def shin_debug(self, ctx: commands.Context):
             await ctx.send("Not so debuggy any more!")
 
 Like standard inheritance, this requires the **function name to be the same to work properly**, so keep this in mind.
@@ -125,8 +125,8 @@ You can even override the shinku base command using this method:
 .. code:: python3
 
     class CustomDebugCog(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
-        @Feature.Command(name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
-        async def jsk(self, ctx: commands.Context):
+        @Feature.Command(name="shinku", aliases=["shin"], invoke_without_command=True, ignore_extra=False)
+        async def shin(self, ctx: commands.Context):
             await ctx.send("I'm walking on a Star!")
 
 Changing who can use shinku
@@ -159,11 +159,11 @@ Please note that this queue is specific to the cog instance.
 If shinku is reloaded, the command-task queue for the older instance will be lost, even if there are uncancelled command-tasks within it.
 This will make it very difficult to cancel those tasks.
 
-.. py:function:: jsk tasks
+.. py:function:: shin tasks
 
     Shows a list of the currently running command-tasks. This includes the index, command qualified name and time invoked.
 
-.. py:function:: jsk cancel <index: int>
+.. py:function:: shin cancel <index: int>
 
     Cancels the command-task at the provided index. If the index is -1, it will cancel the most recent still-running task.
 
@@ -181,9 +181,9 @@ Code can be passed in as either a single line or a full codeblock:
 
 .. code:: md
 
-    ?jsk py 3 + 4
+    ?shin py 3 + 4
 
-    ?jsk py ```py
+    ?shin py ```py
     return 3 + 4
     ```
 
@@ -195,14 +195,14 @@ Codeblocks passed support yielding. Yielding allows results to be received durin
 
 .. code:: md
 
-    ?jsk py ```py
+    ?shin py ```py
     for x in range(5):
         yield x
     ```
 
 Yielded results are treated the same as if they were returned.
 
-When using the ``jsk py`` command, there are a set of contextual variables you can use to interact with Discord:
+When using the ``shin py`` command, there are a set of contextual variables you can use to interact with Discord:
 
 +----------------+-----------------------------------------------------------+
 | ``_bot``       |  The :class:`discord.ext.commands.Bot` instance.          |
@@ -228,7 +228,7 @@ Example:
 
 .. code:: md
 
-    ?jsk py ```py
+    ?shin py ```py
     channel = _bot.get_channel(123456789012345678)
 
     await channel.send(_author.avatar_url_as(format='png'))
@@ -242,13 +242,13 @@ These variables are bound to the local scope and are actively cleaned from the s
 so they don't persist between REPL sessions.
 
 If you want to change this behavior, you can set ``SHINKU_RETAIN=true``, or,
-use the ``jsk retain on`` and ``jsk retain off`` commands to toggle variable retention.
+use the ``shin retain on`` and ``shin retain off`` commands to toggle variable retention.
 
 
 Commands
 ---------
 
-.. py:function:: jsk [python|py] <argument: str>
+.. py:function:: shin [python|py] <argument: str>
 
     |tasked|
 
@@ -266,7 +266,7 @@ Commands
 
     Any other instance is ``repr``'d and sent using the same rules as a string.
 
-.. py:function:: jsk [python_inspect|pythoninspect|pyi] <argument: str>
+.. py:function:: shin [python_inspect|pythoninspect|pyi] <argument: str>
 
     |tasked|
 
@@ -278,7 +278,7 @@ Commands
     else it is sent as a :class:`PaginatorInterface`.
 
 
-.. py:function:: jsk [disassemble|dis] <argument: str>
+.. py:function:: shin [disassemble|dis] <argument: str>
 
     Compiles Python code in an asynchronous context, and returns the disassembly.
 
@@ -290,7 +290,7 @@ Commands
     it is always sent as a :class:`PaginatorInterface`.
 
 
-.. py:function:: jsk [disassemble|dis] <argument: str>
+.. py:function:: shin [disassemble|dis] <argument: str>
 
     Compiles Python code into its Abstract Syntax Tree using :func:`ast.compile`, and then formats it into a visual ASCII tree, with ANSI support if it is usable.
 
@@ -300,7 +300,7 @@ Commands
     it is always sent as a :class:`PaginatorInterface`.
 
 
-.. py:function:: jsk retain <toggle: bool>
+.. py:function:: shin retain <toggle: bool>
 
     Toggles whether variables defined in REPL sessions are retained into future sessions. (OFF by default)
 
@@ -312,7 +312,7 @@ Commands
     (you cannot concurrently share variables between running REPL sessions).
 
 
-.. py:function:: jsk [shell|sh] <argument: str>
+.. py:function:: shin [shell|sh] <argument: str>
 
     |tasked|
 
@@ -323,7 +323,7 @@ Commands
     If no output is produced by the command for 120 seconds, a :class:`asyncio.TimeoutException` will be raised and the shell process will be terminated.
 
 
-.. py:function:: jsk [load|reload] [extensions...]
+.. py:function:: shin [load|reload] [extensions...]
 
     Loads, or reloads, a number of extensions. Extension names are delimited by spaces.
 
@@ -337,22 +337,22 @@ Commands
     Brace expansion works as well, such as ``foo.bar.cogs.{baz,quux,garply}`` to reload ``foo.bar.cogs.baz``,
     ``foo.bar.cogs.quux``, and ``foo.bar.cogs.garply``.
 
-    ``jsk reload ~`` will reload every extension the bot currently has loaded.
+    ``shin reload ~`` will reload every extension the bot currently has loaded.
 
 
-.. py:function:: jsk unload [extensions...]
+.. py:function:: shin unload [extensions...]
 
     Unloads a number of extensions. Extension names are delimited by spaces.
 
-    Matching rules are the same as ``jsk load``.
+    Matching rules are the same as ``shin load``.
 
-    Running ``jsk unload ~`` will unload every extension on your bot. This includes shinku, which may leave you unable to maintain your bot
+    Running ``shin unload ~`` will unload every extension on your bot. This includes shinku, which may leave you unable to maintain your bot
     until it is restarted. Use with care.
 
     If unloading the extension fails, it will be reported with a traceback.
 
 
-.. py:function:: jsk exec [member_and_or_channel...] <command: str>
+.. py:function:: shin exec [member_and_or_channel...] <command: str>
 
     Runs a command as if it were ran by someone else and/or in a different channel.
 
@@ -363,33 +363,33 @@ Commands
 
     If `exec!` is used instead of `exec`, the command will bypass all checks and cooldowns, directly triggering the callback.
 
-.. py:function:: jsk permtrace <channel> [targets...]
+.. py:function:: shin permtrace <channel> [targets...]
 
     Emulates Discord's permission calculation system to create a breakdown of where certain permissions for a member come from.
 
     Targets can either be a member, or a list of roles (to emulate a member with those roles).
     The command will take into account guild permissions and the overwrites for the roles (and member, if applicable) to produce the resulting effective permissions.
 
-.. py:function:: jsk debug <command: str>
+.. py:function:: shin debug <command: str>
 
-    Runs a command using ``jsk python``-style timing and exception reporting.
+    Runs a command using ``shin python``-style timing and exception reporting.
 
     This allows you to invoke a broken command with this command to get the exception directly without having to read logs.
 
     When the command finishes, the time to run will be reported.
 
-.. py:function:: jsk repeat <times: int> <command: str>
+.. py:function:: shin repeat <times: int> <command: str>
 
     |tasked|
 
     Repeats a command the specified amount of times.
 
     This works like a direct message invocation, so cooldowns *will* be honored.
-    You can use ``jsk repeat . jsk sudo ..`` to bypass cooldowns on each invoke if need be.
+    You can use ``shin repeat . shin sudo ..`` to bypass cooldowns on each invoke if need be.
 
     This command will wait for a previous invocation to finish before moving onto the next one.
 
-.. py:function:: jsk cat <file: str>
+.. py:function:: shin cat <file: str>
 
     Reads out the data from a file, displaying it as an uploaded file if the user is on desktop and the content is small enough,
     otherwise, it displays it as a :class:`PaginatorInterface`.
@@ -399,9 +399,9 @@ Commands
 
     If the file has an encoding hint, it will be honored when trying to read it.
 
-    It is possible to specify a linespan by typing e.g. ``jsk cat file.py#L5-10``, which will only display lines 5 through 10 inclusive.
+    It is possible to specify a linespan by typing e.g. ``shin cat file.py#L5-10``, which will only display lines 5 through 10 inclusive.
 
-.. py:function:: jsk curl <url: str>
+.. py:function:: shin curl <url: str>
 
     Downloads a file from a URL, displaying it as an uploaded file if the user is on desktop and the content is small enough,
     otherwise, it displays it as a :class:`PaginatorInterface`.
@@ -411,21 +411,21 @@ Commands
 
     If the file has an encoding hint, it will be honored when trying to read it.
 
-.. py:function:: jsk source <command_name: str>
+.. py:function:: shin source <command_name: str>
 
     Shows the source for a command, displaying it as an uploaded file if the user is on desktop and the content is small enough,
     otherwise, it displays it as a :class:`PaginatorInterface`.
 
-    This is similar to doing ``jsk cat`` on the source file, limited to the line span of the command.
+    This is similar to doing ``shin cat`` on the source file, limited to the line span of the command.
 
-.. py:function:: jsk rtt
+.. py:function:: shin rtt
 
     Calculates the round trip time between your bot and the API, using message sends and edits.
     The latency for each pass will be shown, as well as an average and standard deviation.
 
     This command will also output the websocket latency.
 
-.. py:function:: jsk sync [guild_ids...]
+.. py:function:: shin sync [guild_ids...]
 
     Sync global or guild application commands to Discord.
 

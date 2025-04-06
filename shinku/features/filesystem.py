@@ -34,8 +34,8 @@ class FilesystemFeature(Feature):
 
     __cat_line_regex = re.compile(r"(?:\.\/+)?(.+?)(?:#L?(\d+)(?:\-L?(\d+))?)?$")
 
-    @Feature.Command(parent="jsk", name="cat")
-    async def jsk_cat(self, ctx: ContextA, argument: str):
+    @Feature.Command(parent="shin", name="cat")
+    async def shin_cat(self, ctx: ContextA, argument: str):
         """
         Read out a file, using syntax highlighting if detected.
 
@@ -102,12 +102,12 @@ class FilesystemFeature(Feature):
         except ValueError as exc:
             return await ctx.send(f"`{path}`: Couldn't read this file, {exc}")
 
-    @Feature.Command(parent="jsk", name="curl")
-    async def jsk_curl(self, ctx: ContextA, url: str):
+    @Feature.Command(parent="shin", name="curl")
+    async def shin_curl(self, ctx: ContextA, url: str):
         """
         Download and display a text file from the internet.
 
-        This command is similar to jsk cat, but accepts a URL.
+        This command is similar to shin cat, but accepts a URL.
         """
 
         # remove embed maskers if present

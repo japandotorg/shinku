@@ -26,8 +26,8 @@ class Magnet2(*shinku.OPTIONAL_FEATURES, *shinku.STANDARD_FEATURES):  # pylint: 
     The extended Sinku cog
     """
 
-    @shinku.Feature.Command(name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
-    async def jsk(self, ctx: ContextT):
+    @shinku.Feature.Command(name="shinku", aliases=["shin"], invoke_without_command=True, ignore_extra=False)
+    async def shin(self, ctx: ContextT):
         """
         override test
         """

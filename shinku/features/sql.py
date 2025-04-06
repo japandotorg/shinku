@@ -366,9 +366,9 @@ class SQLFeature(Feature):
     Feature containing SQL-related commands
     """
 
-    JSK_TRY_ATTRIBUTES = ("database_pool", "database", "db_pool", "db", "pool")
+    shin_TRY_ATTRIBUTES = ("database_pool", "database", "db_pool", "db", "pool")
 
-    def jsk_find_adapter(
+    def shin_find_adapter(
         self, ctx: ContextA
     ) -> typing.Union[typing.Tuple[Adapter[typing.Any], str], typing.Tuple[None, None]]:
         """
@@ -376,7 +376,7 @@ class SQLFeature(Feature):
         """
 
         for name_a, source in (("ctx", ctx), ("bot", ctx.bot)):
-            for attribute in self.JSK_TRY_ATTRIBUTES:
+            for attribute in self.shin_TRY_ATTRIBUTES:
                 maybe_adapter = getattr(source, attribute, None)
 
                 if maybe_adapter is None:
@@ -389,14 +389,14 @@ class SQLFeature(Feature):
         return None, None
 
     @Feature.Command(
-        parent="jsk", name="sql", invoke_without_command=True, ignore_extra=False
+        parent="shin", name="sql", invoke_without_command=True, ignore_extra=False
     )
-    async def jsk_sql(self, ctx: ContextA):
+    async def shin_sql(self, ctx: ContextA):
         """
         Parent for SQL adapter related commands
         """
 
-        adapter_shim, location = self.jsk_find_adapter(ctx)
+        adapter_shim, location = self.shin_find_adapter(ctx)
 
         if adapter_shim is None:
             return await ctx.send("No SQL adapter could be found on this bot.")
@@ -404,13 +404,13 @@ class SQLFeature(Feature):
         async with adapter_shim.use():
             return await ctx.send(f"Using {adapter_shim.info()} found at `{location}`")
 
-    @Feature.Command(parent="jsk_sql", name="fetchrow", aliases=["fetchone"])
-    async def jsk_sql_fetchrow(self, ctx: ContextA, *, query: str):
+    @Feature.Command(parent="shin_sql", name="fetchrow", aliases=["fetchone"])
+    async def shin_sql_fetchrow(self, ctx: ContextA, *, query: str):
         """
         Fetch a single row from the SQL database.
         """
 
-        adapter_shim, _ = self.jsk_find_adapter(ctx)
+        adapter_shim, _ = self.shin_find_adapter(ctx)
 
         if adapter_shim is None:
             return await ctx.send("No SQL adapter could be found on this bot.")
@@ -446,13 +446,13 @@ class SQLFeature(Feature):
             interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
             await interface.send_to(ctx)
 
-    @Feature.Command(parent="jsk_sql", name="fetch")
-    async def jsk_sql_fetch(self, ctx: ContextA, *, query: str):
+    @Feature.Command(parent="shin_sql", name="fetch")
+    async def shin_sql_fetch(self, ctx: ContextA, *, query: str):
         """
         Fetch multiple rows from the SQL database.
         """
 
-        adapter_shim, _ = self.jsk_find_adapter(ctx)
+        adapter_shim, _ = self.shin_find_adapter(ctx)
 
         if adapter_shim is None:
             return await ctx.send("No SQL adapter could be found on this bot.")
@@ -492,21 +492,21 @@ class SQLFeature(Feature):
             interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
             await interface.send_to(ctx)
 
-    @Feature.Command(parent="jsk_sql", name="select")
-    async def jsk_sql_select(self, ctx: ContextA, *, query: str):
+    @Feature.Command(parent="shin_sql", name="select")
+    async def shin_sql_select(self, ctx: ContextA, *, query: str):
         """
-        Shortcut for 'jsk sql fetch select'.
+        Shortcut for 'shin sql fetch select'.
         """
 
-        await ctx.invoke(self.jsk_sql_fetch, query=f"SELECT {query}")  # type: ignore[reportCallIssue, reportArgumentType]
+        await ctx.invoke(self.shin_sql_fetch, query=f"SELECT {query}")  # type: ignore[reportCallIssue, reportArgumentType]
 
-    @Feature.Command(parent="jsk_sql", name="execute")
-    async def jsk_sql_execute(self, ctx: ContextA, *, query: str):
+    @Feature.Command(parent="shin_sql", name="execute")
+    async def shin_sql_execute(self, ctx: ContextA, *, query: str):
         """
         Executes a statement against the SQL database.
         """
 
-        adapter_shim, _ = self.jsk_find_adapter(ctx)
+        adapter_shim, _ = self.shin_find_adapter(ctx)
 
         if adapter_shim is None:
             return await ctx.send("No SQL adapter could be found on this bot.")
@@ -522,15 +522,15 @@ class SQLFeature(Feature):
 
         await ctx.reply(content=output)
 
-    @Feature.Command(parent="jsk_sql", name="schema")
-    async def jsk_sql_schema(
+    @Feature.Command(parent="shin_sql", name="schema")
+    async def shin_sql_schema(
         self, ctx: ContextA, *, query: typing.Optional[str] = None
     ):
         """
         Queries for the current schema and shows located table structures.
         """
 
-        adapter_shim, _ = self.jsk_find_adapter(ctx)
+        adapter_shim, _ = self.shin_find_adapter(ctx)
 
         if adapter_shim is None:
             return await ctx.send("No SQL adapter could be found on this bot.")

@@ -52,8 +52,8 @@ async def entry(bot: commands.Bot, *args: typing.Any, **kwargs: typing.Any):
 
         LOGGER.critical(
             "Generated a unique UUID for this session: %s"
-            "\nYou can use Sinku with your bot once it starts using `%s::jsk <subcommand>`"
-            "\nIf you have no message content, you can prefix it with the mention: `@Bot %s::jsk <subcommand>`",
+            "\nYou can use Sinku with your bot once it starts using `%s::shin <subcommand>`"
+            "\nIf you have no message content, you can prefix it with the mention: `@Bot %s::shin <subcommand>`",
             bot.unique_id,  # type: ignore[reportAttributeAccessIssue]
             bot.unique_id,  # type: ignore[reportAttributeAccessIssue]
             bot.unique_id,  # type: ignore[reportAttributeAccessIssue]
@@ -67,7 +67,7 @@ async def entry(bot: commands.Bot, *args: typing.Any, **kwargs: typing.Any):
             )
         else:
             try:
-                pyperclip.copy(f"{bot.unique_id}::jsk")  # type: ignore[reportAttributeAccessIssue]
+                pyperclip.copy(f"{bot.unique_id}::shin")  # type: ignore[reportAttributeAccessIssue]
             except Exception as error:  # pylint: disable=broad-except
                 LOGGER.critical(
                     "The prefix could not be copied to your clipboard: %s", error

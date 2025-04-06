@@ -62,7 +62,7 @@ You can also import the module to use the command development utilities.
             It supports simple expressions:
             <br><br> <!-- Horrifying that I have to do this -->
             <blockquote>
-                <p>&gt;  <i>jsk py 3+4</i></p>
+                <p>&gt;  <i>shin py 3+4</i></p>
                 <img align="left" width="50" height="50" src=".github/assets/beep_bot.svg">
                     <p><b>Beep Bot</b></p>
                     7
@@ -71,7 +71,7 @@ You can also import the module to use the command development utilities.
             It also supports async expressions:
             <br><br>
             <blockquote>
-                <p>&gt;  <i>jsk py await _ctx.pins()</i></p>
+                <p>&gt;  <i>shin py await _ctx.pins()</i></p>
                 <img align="left" width="50" height="50" src=".github/assets/beep_bot.svg">
                     <p><b>Beep Bot</b></p>
                     [&lt;Message id=123456789012345678 ...&gt;, ...]
@@ -143,7 +143,7 @@ You can also import the module to use the command development utilities.
             <br>
             On Windows, shinku will use PowerShell if it's detected, otherwise, it will use Command Prompt.
             <br><br>
-            The results from the commands you pass in are returned through a paginator interface live as the command runs. If you need to stop a command, you can press the stop button reaction, or use <code>jsk cancel</code>.
+            The results from the commands you pass in are returned through a paginator interface live as the command runs. If you need to stop a command, you can press the stop button reaction, or use <code>shin cancel</code>.
             <br><br>
             The execution will terminate automatically if no output is produced for 120 seconds.
             <br><br>
@@ -165,11 +165,11 @@ You can also import the module to use the command development utilities.
             <h4>&gt; <code>shinku unload [extensions...]</code></h4>
             These commands load, reload, or unload extensions on your bot.
             <br><br>
-            You can reload shinku itself with <code>jsk reload shinku</code>.
+            You can reload shinku itself with <code>shin reload shinku</code>.
             <br>
-            <code>jsk reload ~</code> will reload all extensions on your bot.
+            <code>shin reload ~</code> will reload all extensions on your bot.
             <br><br>
-            You can load, reload, or unload multiple extensions at once: <code>jsk reload cogs.one cogs.two</code>
+            You can load, reload, or unload multiple extensions at once: <code>shin reload cogs.one cogs.two</code>
             <br><br>
             <h4>&gt; <code>shinku shutdown</code></h4>
             This command gracefully shuts down your bot.
@@ -195,7 +195,7 @@ You can also import the module to use the command development utilities.
             <br><br>
             You can use this to read things like bot logs or source files in your project.
             <h4>&gt; <code>shinku curl &lt;url&gt;</code></h4>
-            This command reads text from a URL and attempts to detect encoding and language, similar to <code>jsk cat</code>.
+            This command reads text from a URL and attempts to detect encoding and language, similar to <code>shin cat</code>.
             <br><br>
             You can use this to display contents of files online, for instance, the <code>message.txt</code> files created when a message is too long, or raw files from paste sites.
             <br><br>
@@ -214,7 +214,7 @@ You can also import the module to use the command development utilities.
             <h4>&gt; <code>shinku repeat &lt;times&gt; &lt;command string&gt;</code></h4>
             These commands serve as command control for other commands.
             <br><br>
-            <code>shinku exec</code> allows you to execute a command as another user, in another channel, or both. Using aliases with a postfix exclamation mark (such as <code>jsk exec! ...</code>) executes the command bypassing checks and cooldowns.
+            <code>shinku exec</code> allows you to execute a command as another user, in another channel, or both. Using aliases with a postfix exclamation mark (such as <code>shin exec! ...</code>) executes the command bypassing checks and cooldowns.
             <br><br>
             <code>shinku debug</code> executes a command with an exception wrapper and a timer. This allows you to quickly get feedback on reproducable command errors and slowdowns.
             <br><br>

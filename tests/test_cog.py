@@ -53,8 +53,8 @@ async def test_loads(bot):
     assert bot.get_cog("Sinku")
     assert isinstance(bot.get_cog("Sinku"), commands.Cog)
 
-    assert bot.get_command("jsk")
-    assert isinstance(bot.get_command("jsk"), commands.Command)
+    assert bot.get_command("shin")
+    assert isinstance(bot.get_command("shin"), commands.Command)
 
 
 @pytest.mark.asyncio
@@ -108,56 +108,56 @@ async def test_cog_check(bot):
 async def test_commands(bot):
     cog = bot.get_cog("Sinku")
 
-    # test 'jsk'
+    # test 'shin'
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk').callback(cog, ctx)
+        await bot.get_command('shin').callback(cog, ctx)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "Module was loaded" in text
 
-    # test 'jsk hide' and 'jsk show'
-    cog.jsk.hidden = False
+    # test 'shin hide' and 'shin show'
+    cog.shin.hidden = False
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk hide').callback(cog, ctx)
+        await bot.get_command('shin hide').callback(cog, ctx)
 
-        assert cog.jsk.hidden
+        assert cog.shin.hidden
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "now hidden" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk hide').callback(cog, ctx)
+        await bot.get_command('shin hide').callback(cog, ctx)
 
-        assert cog.jsk.hidden
+        assert cog.shin.hidden
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "already hidden" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk show').callback(cog, ctx)
+        await bot.get_command('shin show').callback(cog, ctx)
 
-        assert not cog.jsk.hidden
+        assert not cog.shin.hidden
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "now visible" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk show').callback(cog, ctx)
+        await bot.get_command('shin show').callback(cog, ctx)
 
-        assert not cog.jsk.hidden
+        assert not cog.shin.hidden
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "already visible" in text
 
-    # test 'jsk tasks'
+    # test 'shin tasks'
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk tasks').callback(cog, ctx)
+        await bot.get_command('shin tasks').callback(cog, ctx)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
@@ -165,18 +165,18 @@ async def test_commands(bot):
 
     with utils.mock_ctx() as ctx:
         with cog.submit(ctx):
-            interface = await bot.get_command('jsk tasks').callback(cog, ctx)
+            interface = await bot.get_command('shin tasks').callback(cog, ctx)
 
             ctx.send.assert_called_once()
 
             interface.task.cancel()
 
-    # test 'jsk cancel'
+    # test 'shin cancel'
     with utils.mock_ctx() as ctx:
         # test explicit
         with cog.submit(ctx) as command_task:
             with pytest.raises(asyncio.CancelledError):
-                await bot.get_command('jsk cancel').callback(cog, ctx, index=command_task.index)
+                await bot.get_command('shin cancel').callback(cog, ctx, index=command_task.index)
                 await asyncio.sleep(0.1)
 
             ctx.send.assert_called_once()
@@ -187,7 +187,7 @@ async def test_commands(bot):
         # test implicit
         with cog.submit(ctx) as command_task:
             with pytest.raises(asyncio.CancelledError):
-                await bot.get_command('jsk cancel').callback(cog, ctx, index=-1)
+                await bot.get_command('shin cancel').callback(cog, ctx, index=-1)
                 await asyncio.sleep(0.1)
 
             ctx.send.assert_called_once()
@@ -197,7 +197,7 @@ async def test_commands(bot):
     with utils.mock_ctx() as ctx:
         # test unknown task
         with cog.submit(ctx) as command_task:
-            await bot.get_command('jsk cancel').callback(cog, ctx, index=123456789012345678)
+            await bot.get_command('shin cancel').callback(cog, ctx, index=123456789012345678)
 
             ctx.send.assert_called_once()
             text = ctx.send.call_args[0][0]
@@ -205,17 +205,17 @@ async def test_commands(bot):
 
     with utils.mock_ctx() as ctx:
         # test no tasks
-        await bot.get_command('jsk cancel').callback(cog, ctx, index=123456789012345678)
+        await bot.get_command('shin cancel').callback(cog, ctx, index=123456789012345678)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "No tasks" in text
 
-    # test 'jsk retain'
+    # test 'shin retain'
     cog.retain = False
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=True)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=True)
 
         assert cog.retain
 
@@ -224,7 +224,7 @@ async def test_commands(bot):
         assert "is ON" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=True)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=True)
 
         assert cog.retain
 
@@ -233,14 +233,14 @@ async def test_commands(bot):
         assert "already set to ON" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=None)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=None)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]
         assert "is set to ON" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=False)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=False)
 
         assert not cog.retain
 
@@ -249,7 +249,7 @@ async def test_commands(bot):
         assert "is OFF" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=False)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=False)
 
         assert not cog.retain
 
@@ -258,7 +258,7 @@ async def test_commands(bot):
         assert "already set to OFF" in text
 
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk retain').callback(cog, ctx, toggle=None)
+        await bot.get_command('shin retain').callback(cog, ctx, toggle=None)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]

@@ -100,11 +100,11 @@ class InvocationFeature(Feature):
     OVERRIDE_SIGNATURE = typing.Union[SlimUserConverter, SlimChannelConverter]
 
     @Feature.Command(
-        parent="jsk",
+        parent="shin",
         name="override",
         aliases=["execute", "exec", "override!", "execute!", "exec!"],
     )
-    async def jsk_override(
+    async def shin_override(
         self,
         ctx: ContextT,
         overrides: commands.Greedy[OVERRIDE_SIGNATURE],
@@ -131,7 +131,7 @@ class InvocationFeature(Feature):
                 if ctx.guild:
                     # Try to upgrade to a Member instance
                     # This used to be done by a Union converter, but doing it like this makes
-                    #  the command more compatible with chaining, e.g. `jsk in .. jsk su ..`
+                    #  the command more compatible with chaining, e.g. `shin in .. shin su ..`
                     target_member = None
 
                     with contextlib.suppress(discord.HTTPException):
@@ -162,13 +162,13 @@ class InvocationFeature(Feature):
         await alt_ctx.command.invoke(alt_ctx)
         return
 
-    @Feature.Command(parent="jsk", name="repeat")
-    async def jsk_repeat(self, ctx: ContextT, times: int, *, command_string: str):
+    @Feature.Command(parent="shin", name="repeat")
+    async def shin_repeat(self, ctx: ContextT, times: int, *, command_string: str):
         """
         Runs a command multiple times in a row.
 
         This acts like the command was invoked several times manually, so it obeys cooldowns.
-        You can use this in conjunction with `jsk sudo` to bypass this.
+        You can use this in conjunction with `shin sudo` to bypass this.
         """
 
         with self.submit(ctx):  # allow repeats to be cancelled
@@ -188,8 +188,8 @@ class InvocationFeature(Feature):
 
                 await alt_ctx.command.reinvoke(alt_ctx)
 
-    @Feature.Command(parent="jsk", name="debug", aliases=["dbg"])
-    async def jsk_debug(self, ctx: ContextT, *, command_string: str):
+    @Feature.Command(parent="shin", name="debug", aliases=["dbg"])
+    async def shin_debug(self, ctx: ContextT, *, command_string: str):
         """
         Run a command timing execution and catching exceptions.
         """
@@ -214,8 +214,8 @@ class InvocationFeature(Feature):
             f"Command `{alt_ctx.command.qualified_name}` finished in {end - start:.3f}s."
         )
 
-    @Feature.Command(parent="jsk", name="source", aliases=["src"])
-    async def jsk_source(self, ctx: ContextA, *, command_name: str):
+    @Feature.Command(parent="shin", name="source", aliases=["src"])
+    async def shin_source(self, ctx: ContextA, *, command_name: str):
         """
         Displays the source code for a command.
         """

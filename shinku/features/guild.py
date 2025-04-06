@@ -67,8 +67,8 @@ class GuildFeature(Feature):
         for i in range(0, len(array), chunk_size):
             yield array[i : i + chunk_size]
 
-    @Feature.Command(parent="jsk", name="permtrace")
-    async def jsk_permtrace(
+    @Feature.Command(parent="shin", name="permtrace")
+    async def shin_permtrace(
         self,
         ctx: ContextA,
         channel: typing.Union[discord.TextChannel, discord.VoiceChannel],

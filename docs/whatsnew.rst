@@ -8,13 +8,13 @@ Version 2.6.0
 
 My username has changed. This version fixes package metadata associated with this as well as bringing the following (long-overdue) changes:
 
-- The ``jsk sql`` command, which will try to identify SQL adapters on your bot and provide an interface for using them.
+- The ``shin sql`` command, which will try to identify SQL adapters on your bot and provide an interface for using them.
 - ``python -m shinku`` will now attempt to copy the automatically generated bot prefix to your clipboard if the appropriate libraries are installed.
-- Support for translations in ``jsk sync``
-- ``jsk cancel`` now uses Discord markdown timestamps to indicate when tasks were started.
-- ``jsk specialist`` works like `specialist <https://pypi.org/project/specialist/>`_ by executing Python code and reporting areas in which Python 3.11+ optimizations apply.
+- Support for translations in ``shin sync``
+- ``shin cancel`` now uses Discord markdown timestamps to indicate when tasks were started.
+- ``shin specialist`` works like `specialist <https://pypi.org/project/specialist/>`_ by executing Python code and reporting areas in which Python 3.11+ optimizations apply.
 - The version of ``import_expression`` used has been bumped, making inline imports possible again on new Python versions.
-- Some fixes to how ``jsk sh`` and similar commands work to make them function better on UNIX systems.
+- Some fixes to how ``shin sh`` and similar commands work to make them function better on UNIX systems.
 
 Because it has been such a long time since the last formal release, a lot of these improvements have not received much field testing and may contain regressions. Please report any issues you find.
 
@@ -31,18 +31,18 @@ Version 2.5.1
 This version includes:
 
 - Some fixes for changes that broke existing fork support
-- A fix for ``jsk pip`` that tries to select the right pip for the current Python when a venv is not correctly activated.
+- A fix for ``shin pip`` that tries to select the right pip for the current Python when a venv is not correctly activated.
 - Additional shortcut 'scaffold' methods that allow you to easily leverage some compilers/interpreters via the shell when detected.
-- If a REPL (``jsk py``, etc) contains mentions and fails to compile as is, shinku will attempt to substitute the mentions with a respective object. This allows you to use mentions as literals when not in a codeblock.
+- If a REPL (``shin py``, etc) contains mentions and fails to compile as is, shinku will attempt to substitute the mentions with a respective object. This allows you to use mentions as literals when not in a codeblock.
 - Some reaction-related functionality has been adjusted to try and avoid sending reactions when it's not necessary. This is to account for the new, slower, reaction rate limits. Note that some of these benefits only apply to 2.0a+ users.
-- An experimental ``jsk timeit`` command that attempts to do line-based timing evaluation of Python code. This isn't super reliable as is, and generally should not be used for small or absolute measurements, but rather to find large snags that could be bottlenecking.
+- An experimental ``shin timeit`` command that attempts to do line-based timing evaluation of Python code. This isn't super reliable as is, and generally should not be used for small or absolute measurements, but rather to find large snags that could be bottlenecking.
 
 Version 2.5.0
 -------------
 
 This version adds mostly-complete strict typing to the library, supporting type checkers using the public API.
 
-``jsk sync`` has also been improved, now including a diagnostic for commands that fail to sync,
+``shin sync`` has also been improved, now including a diagnostic for commands that fail to sync,
 and the ability to use ``$`` to sync global commands, ``.`` to sync the current guild, and ``*`` to sync all known guilds.
 
 Version 2.4.0
@@ -60,14 +60,14 @@ New stuff in this release:
 - shinku will now correctly provide and use async setup/add_cog/load_extension on 2.0a
 - ``__main__`` has been improved to allow you to specify a log file to output to in addition to stdout.
 - ``WrappedPaginator`` performance has been improved over tenfold, reducing lag from extremely large outputs
-- The ``jsk sync`` command has been added, allowing you to sync either your global or guild-specific app_commands.
-- ``jsk pyi`` now by default includes the help text on objects when it can find it, making it quicker to determine how to use functions and classes.
-- The ``jsk ast`` command has been added, which takes in code and produces a colourful AST breakdown tree.
-- The ``jsk`` command will now correctly detect and display the version of the source of the ``discord`` package on forks.
-- The ``jsk`` command will now show whether the ``message_content`` intent is enabled or not.
-- The ``jsk sh`` support will now attempt to preserve and properly display ANSI when it is possible to do so.
-- The ``jsk sh`` command has a new alias: ``jsk terminal``.
-- The ``jsk vc ytdl`` command will now prioritize ``yt-dlp`` when it's available to take advantage of the reduced staggering.
+- The ``shin sync`` command has been added, allowing you to sync either your global or guild-specific app_commands.
+- ``shin pyi`` now by default includes the help text on objects when it can find it, making it quicker to determine how to use functions and classes.
+- The ``shin ast`` command has been added, which takes in code and produces a colourful AST breakdown tree.
+- The ``shin`` command will now correctly detect and display the version of the source of the ``discord`` package on forks.
+- The ``shin`` command will now show whether the ``message_content`` intent is enabled or not.
+- The ``shin sh`` support will now attempt to preserve and properly display ANSI when it is possible to do so.
+- The ``shin sh`` command has a new alias: ``shin terminal``.
+- The ``shin vc ytdl`` command will now prioritize ``yt-dlp`` when it's available to take advantage of the reduced staggering.
 - The ``ALWAYS_DM_TRACEBACK`` flag has been added to always DM tracebacks, even for syntax errors.
 - The ``USE_ANSI_ALWAYS`` and ``USE_ANSI_NEVER`` flags have been added to override ANSI use in commands that support it.
 - Typing has been improved across the module.
@@ -107,20 +107,20 @@ I have already gone over everything in my README writeup, so I will reproduce it
 Version 2.2.0
 -------------
 
-The ``jsk sudo``, ``jsk su`` and ``jsk in`` commands have been removed and replaced with a single command that handles all three at once.
+The ``shin sudo``, ``shin su`` and ``shin in`` commands have been removed and replaced with a single command that handles all three at once.
 
-``jsk exec`` now automatically handles IDs or mentions for channels, users, or threads (only with discord v2.0a+).
-Aliases with a postfix ``!`` bypass checks and cooldowns, like ``jsk sudo`` used to do.
+``shin exec`` now automatically handles IDs or mentions for channels, users, or threads (only with discord v2.0a+).
+Aliases with a postfix ``!`` bypass checks and cooldowns, like ``shin sudo`` used to do.
 
 Example of how the commands change with this release:
 
-- ``jsk su @user command`` -> ``jsk exec @user command``
-- ``jsk in #channel command`` -> ``jsk exec #channel command``
-- ``jsk in #channel jsk su @user command`` -> ``jsk exec #channel @user command`` or ``jsk exec @user #channel command``
-- ``jsk sudo command`` -> ``jsk exec! command``
+- ``shin su @user command`` -> ``shin exec @user command``
+- ``shin in #channel command`` -> ``shin exec #channel command``
+- ``shin in #channel shin su @user command`` -> ``shin exec #channel @user command`` or ``shin exec @user #channel command``
+- ``shin sudo command`` -> ``shin exec! command``
 
 This allows combinations that were previously not possible, for example,
-``jsk exec! #channel @user command`` now executes a command as a user in another channel or thread, bypassing any checks or cooldowns that user or channel has against the command.
+``shin exec! #channel @user command`` now executes a command as a user in another channel or thread, bypassing any checks or cooldowns that user or channel has against the command.
 
 The flag system (i.e. the ``SHINKU_FLAG=...`` system) has been rewritten to use various degrees of lazy evaluation.
 This means setting flags like ``SHINKU_HIDE`` and ``SHINKU_RETAIN`` need only precede loading the Sinku extension, as opposed to the entire module.
@@ -134,10 +134,10 @@ A programmatic interface for flags is available, however, its use is discouraged
 
     shinku.Flags.NO_UNDERSCORE = True
 
-The ``jsk invite`` command has been added, which is a developer convenience command that supplies the invite link for the bot it is ran on.
+The ``shin invite`` command has been added, which is a developer convenience command that supplies the invite link for the bot it is ran on.
 This command is most useful for bots that predate the behavior change that merged bot and application IDs, saving the time of having to retrieve the application ID yourself.
 
-Permissions can be supplied, e.g., ``jsk invite kick_members manage_messages`` will create an invite requesting those two permissions.
+Permissions can be supplied, e.g., ``shin invite kick_members manage_messages`` will create an invite requesting those two permissions.
 
 The invites produced request slash commands for convenience.
 
@@ -166,46 +166,46 @@ Python version 3.7 has been dropped. Sinku 2.0 requires Python 3.8 or greater.
 New commands
 ~~~~~~~~~~~~~
 
-- ``jsk rtt``
+- ``shin rtt``
     Calculates the round-trip time between your bot and the Discord API.
     Reports exact values as well as an average and standard deviation.
 
-- ``jsk dis``
+- ``shin dis``
     Disassembles a given piece of Python code in REPL context, returning the bytecode.
     This does not actually execute the code, but can be used to identify compiler behavior and optimizations.
 
-- ``jsk permtrace``
+- ``shin permtrace``
     Calculates the effect of permissions and overwrites on a given member or set of roles in a channel.
     This can be used to identify why a member does, or does not, have a permission in a given place.
 
 Command improvements
 ~~~~~~~~~~~~~~~~~~~~~
-- ``jsk``
+- ``shin``
     Information on sharding status for both automatically and manually sharded bots is now displayed.
 
-    The root 'jsk' command can now be sanely overridden, removed, or renamed using the Feature system.
+    The root 'shin' command can now be sanely overridden, removed, or renamed using the Feature system.
 
-- ``jsk py`` / ``jsk pyi``
+- ``shin py`` / ``shin pyi``
     Exceptions now display the line from which they originate, instead of just the line number.
 
     Large results that fit within the Discord preview threshold are now uploaded as files,
     for better navigability.
 
-- ``jsk sh``
+- ``shin sh``
     Timeout has been increased from 90 seconds from invocation, to 120 seconds from the last output.
 
     This should reduce the chance of termination from long-running installs or other processes.
 
-- ``jsk source``
+- ``shin source``
     Triple backticks inside of source files no longer cause the file content to spill outside of its codeblock.
 
     Large results that fit within the Discord preview threshold are now uploaded as files,
     for better navigability.
 
-- ``jsk vc``
+- ``shin vc``
     Voice commands no longer appear if their relevant dependencies are not installed.
 
-- ``jsk shutdown``
+- ``shin shutdown``
     Now uses ``bot.close`` to prevent deprecation warnings.
 
     Fixed a regression with braille J support.

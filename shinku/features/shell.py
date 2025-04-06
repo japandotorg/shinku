@@ -105,11 +105,11 @@ class ShellFeature(Feature):
                 )
 
     @Feature.Command(
-        parent="jsk",
+        parent="shin",
         name="shell",
         aliases=["bash", "sh", "powershell", "ps1", "ps", "cmd", "terminal"],
     )
-    async def jsk_shell(self, ctx: ContextA, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
+    async def shin_shell(self, ctx: ContextA, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
         """
         Executes statements in the system shell.
 
@@ -153,24 +153,24 @@ class ShellFeature(Feature):
 
                 await interface.add_line(f"\n[status] Return code {reader.close_code}")
 
-    @Feature.Command(parent="jsk", name="git")
-    async def jsk_git(self, ctx: ContextA, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
+    @Feature.Command(parent="shin", name="git")
+    async def shin_git(self, ctx: ContextA, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
         """
-        Shortcut for 'jsk sh git'. Invokes the system shell.
+        Shortcut for 'shin sh git'. Invokes the system shell.
         """
 
         if typing.TYPE_CHECKING:
             argument: Codeblock = argument
 
         return await ctx.invoke(
-            self.jsk_shell,  # type: ignore[reportAttributeAccessIssue]
+            self.shin_shell,  # type: ignore[reportAttributeAccessIssue]
             argument=Codeblock(argument.language, "git " + argument.content),  # type:ignore[reportCallIssue]
         )
 
-    @Feature.Command(parent="jsk", name="pip")
-    async def jsk_pip(self, ctx: commands.Context, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
+    @Feature.Command(parent="shin", name="pip")
+    async def shin_pip(self, ctx: commands.Context, *, argument: codeblock_converter):  # type: ignore[reportGeneralTypeIssue]
         """
-        Shortcut for 'jsk sh pip'. Invokes the system shell.
+        Shortcut for 'shin sh pip'. Invokes the system shell.
         """
 
         if typing.TYPE_CHECKING:
@@ -190,14 +190,14 @@ class ShellFeature(Feature):
                 break
 
         return await ctx.invoke(
-            self.jsk_shell,  # type: ignore[reportArgumentType]
+            self.shin_shell,  # type: ignore[reportArgumentType]
             argument=Codeblock(argument.language, f"{executable} {argument.content}"),  # type: ignore[reportCallIssue]
         )
 
     if shutil.which("node") and shutil.which("npm"):
 
-        @Feature.Command(parent="jsk", name="node")
-        async def jsk_node(
+        @Feature.Command(parent="shin", name="node")
+        async def shin_node(
             self,
             ctx: commands.Context,  # type:ignore[reportMissingTypeArgument]
             *,
@@ -212,12 +212,12 @@ class ShellFeature(Feature):
 
             requirements = "".join(
                 f"npm install {match} && "
-                for match in re.findall("// jsk require: (.+)", argument.content)
+                for match in re.findall("// shin require: (.+)", argument.content)
             )
 
             with scaffold("npm", content=argument.content) as directory:
                 return await ctx.invoke(
-                    self.jsk_shell,  # type: ignore[reportArgumentType]
+                    self.shin_shell,  # type: ignore[reportArgumentType]
                     argument=Codeblock(
                         "js",
                         f"cd {directory} && {requirements}npm run main",  # type: ignore[reportCallIssue]
@@ -226,8 +226,8 @@ class ShellFeature(Feature):
 
     if shutil.which("pyright"):
 
-        @Feature.Command(parent="jsk", name="pyright")
-        async def jsk_pyright(
+        @Feature.Command(parent="shin", name="pyright")
+        async def shin_pyright(
             self,
             ctx: commands.Context,  # type:ignore[reportMissingTypeArgument]
             *,
@@ -242,14 +242,14 @@ class ShellFeature(Feature):
 
             with scaffold("pyright", content=argument.content) as directory:
                 return await ctx.invoke(
-                    self.jsk_shell,  # type: ignore[reportArgumentType]
+                    self.shin_shell,  # type: ignore[reportArgumentType]
                     argument=Codeblock("js", f"cd {directory} && pyright main.py"),  # type:ignore[reportCallIssue]
                 )
 
     if shutil.which("rustc") and shutil.which("cargo"):
 
-        @Feature.Command(parent="jsk", name="rustc")
-        async def jsk_rustc(
+        @Feature.Command(parent="shin", name="rustc")
+        async def shin_rustc(
             self,
             ctx: commands.Context,  # type:ignore[reportMissingTypeArgument]
             *,
@@ -263,13 +263,13 @@ class ShellFeature(Feature):
                 argument: Codeblock = argument
 
             requirements = "\n".join(
-                re.findall("// jsk require: (.+)", argument.content)
+                re.findall("// shin require: (.+)", argument.content)
             )
 
             with scaffold(
                 "cargo", content=argument.content, requirements=requirements
             ) as directory:
                 return await ctx.invoke(
-                    self.jsk_shell,  # type: ignore[reportArgumentType]
+                    self.shin_shell,  # type: ignore[reportArgumentType]
                     argument=Codeblock("rust", f"cd {directory} && cargo run"),  # type:ignore[reportCallIssue]
                 )

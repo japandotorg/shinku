@@ -64,9 +64,9 @@ async def test_commands(bot):
 
     assert cog is not None
 
-    # test 'jsk'
+    # test 'shin'
     with utils.mock_ctx() as ctx:
-        await bot.get_command('jsk').callback(cog, ctx)
+        await bot.get_command('shin').callback(cog, ctx)
 
         ctx.send.assert_called_once()
         text = ctx.send.call_args[0][0]

@@ -38,17 +38,17 @@ except ImportError:
 
 class RootCommand(Feature):
     """
-    Feature containing the root jsk command
+    Feature containing the root shin command
     """
 
     def __init__(self, *args: typing.Any, **kwargs: typing.Any):
         super().__init__(*args, **kwargs)
-        self.jsk.hidden = Flags.HIDE  # type: ignore[reportAttributeAccessIssue]
+        self.shin.hidden = Flags.HIDE  # type: ignore[reportAttributeAccessIssue]
 
     @Feature.Command(
-        name="shinku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False
+        name="shinku", aliases=["shin", "jsk"], invoke_without_command=True, ignore_extra=False
     )
-    async def jsk(self, ctx: ContextA):
+    async def shin(self, ctx: ContextA):
         """
         The Sinku debug and diagnostic commands.
 
@@ -165,34 +165,34 @@ class RootCommand(Feature):
         await ctx.send("\n".join(summary))
 
     # pylint: disable=no-member
-    @Feature.Command(parent="jsk", name="hide")
-    async def jsk_hide(self, ctx: ContextA):
+    @Feature.Command(parent="shin", name="hide")
+    async def shin_hide(self, ctx: ContextA):
         """
         Hides Sinku from the help command.
         """
 
-        if self.jsk.hidden:  # type: ignore[reportAttributeAccessIssue]
+        if self.shin.hidden:  # type: ignore[reportAttributeAccessIssue]
             return await ctx.send("Sinku is already hidden.")
 
-        self.jsk.hidden = True  # type: ignore[reportAttributeAccessIssue]
+        self.shin.hidden = True  # type: ignore[reportAttributeAccessIssue]
         await ctx.send("Sinku is now hidden.")
 
-    @Feature.Command(parent="jsk", name="show")
-    async def jsk_show(self, ctx: ContextA):
+    @Feature.Command(parent="shin", name="show")
+    async def shin_show(self, ctx: ContextA):
         """
         Shows Sinku in the help command.
         """
 
-        if not self.jsk.hidden:  # type: ignore[reportAttributeAccessIssue]
+        if not self.shin.hidden:  # type: ignore[reportAttributeAccessIssue]
             return await ctx.send("Sinku is already visible.")
 
-        self.jsk.hidden = False  # type: ignore[reportAttributeAccessIssue]
+        self.shin.hidden = False  # type: ignore[reportAttributeAccessIssue]
         await ctx.send("Sinku is now visible.")
 
     # pylint: enable=no-member
 
-    @Feature.Command(parent="jsk", name="tasks")
-    async def jsk_tasks(self, ctx: ContextA):
+    @Feature.Command(parent="shin", name="tasks")
+    async def shin_tasks(self, ctx: ContextA):
         """
         Shows the currently running shinku tasks.
         """
@@ -217,8 +217,8 @@ class RootCommand(Feature):
         interface = PaginatorInterface(ctx.bot, paginator, owner=ctx.author)
         return await interface.send_to(ctx)
 
-    @Feature.Command(parent="jsk", name="cancel")
-    async def jsk_cancel(self, ctx: ContextA, *, index: typing.Union[int, str]):
+    @Feature.Command(parent="shin", name="cancel")
+    async def shin_cancel(self, ctx: ContextA, *, index: typing.Union[int, str]):
         """
         Cancels a task with the given index.
 

@@ -35,8 +35,8 @@ class ManagementFeature(Feature):
     Feature containing the extension and bot control commands
     """
 
-    @Feature.Command(parent="jsk", name="load", aliases=["reload"])
-    async def jsk_load(self, ctx: ContextA, *extensions: ExtensionConverter):
+    @Feature.Command(parent="shin", name="load", aliases=["reload"])
+    async def shin_load(self, ctx: ContextA, *extensions: ExtensionConverter):
         """
         Loads or reloads the given extension names.
 
@@ -47,7 +47,7 @@ class ManagementFeature(Feature):
 
         paginator = commands.Paginator(prefix="", suffix="")
 
-        # 'jsk reload' on its own just reloads shinku
+        # 'shin reload' on its own just reloads shinku
         if ctx.invoked_with == "reload" and not extensions:
             extensions = [["shinku"]]
 
@@ -86,8 +86,8 @@ class ManagementFeature(Feature):
         for page in paginator.pages:
             await ctx.send(page)
 
-    @Feature.Command(parent="jsk", name="unload")
-    async def jsk_unload(self, ctx: ContextA, *extensions: ExtensionConverter):
+    @Feature.Command(parent="shin", name="unload")
+    async def shin_unload(self, ctx: ContextA, *extensions: ExtensionConverter):
         """
         Unloads the given extension names.
 
@@ -119,8 +119,8 @@ class ManagementFeature(Feature):
         for page in paginator.pages:
             await ctx.send(page)
 
-    @Feature.Command(parent="jsk", name="shutdown", aliases=["logout"])
-    async def jsk_shutdown(self, ctx: ContextA):
+    @Feature.Command(parent="shin", name="shutdown", aliases=["logout"])
+    async def shin_shutdown(self, ctx: ContextA):
         """
         Logs this bot out.
         """
@@ -134,8 +134,8 @@ class ManagementFeature(Feature):
         await ctx.send(f"Logging out now{ellipse_character}")
         await ctx.bot.close()
 
-    @Feature.Command(parent="jsk", name="invite")
-    async def jsk_invite(self, ctx: ContextA, *perms: str):
+    @Feature.Command(parent="shin", name="invite")
+    async def shin_invite(self, ctx: ContextA, *perms: str):
         """
         Retrieve the invite URL for this bot.
 
@@ -163,8 +163,8 @@ class ManagementFeature(Feature):
             f"Link to invite this bot:\n<https://discordapp.com/oauth2/authorize?{urlencode(query, safe='+')}>"
         )
 
-    @Feature.Command(parent="jsk", name="rtt", aliases=["ping"])
-    async def jsk_rtt(self, ctx: ContextA):
+    @Feature.Command(parent="shin", name="rtt", aliases=["ping"])
+    async def shin_rtt(self, ctx: ContextA):
         """
         Calculates Round-Trip Time to the API.
         """
@@ -220,8 +220,8 @@ class ManagementFeature(Feature):
 
     SLASH_COMMAND_ERROR = re.compile(r"In ((?:\d+\.[a-z]+\.?)+)")
 
-    @Feature.Command(parent="jsk", name="sync")
-    async def jsk_sync(self, ctx: ContextA, *targets: str):
+    @Feature.Command(parent="shin", name="sync")
+    async def shin_sync(self, ctx: ContextA, *targets: str):
         """
         Sync global or guild application commands to Discord.
         """

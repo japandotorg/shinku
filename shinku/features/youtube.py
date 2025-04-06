@@ -50,9 +50,9 @@ class YouTubeFeature(Feature):
     """
 
     @Feature.Command(
-        parent="jsk_voice", name="youtube_dl", aliases=["youtubedl", "ytdl", "yt"]
+        parent="shin_voice", name="youtube_dl", aliases=["youtubedl", "ytdl", "yt"]
     )
-    async def jsk_vc_youtube_dl(self, ctx: ContextA, *, url: str):
+    async def shin_vc_youtube_dl(self, ctx: ContextA, *, url: str):
         """
         Plays audio from youtube_dl-compatible sources.
         """
